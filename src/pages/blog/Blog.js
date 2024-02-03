@@ -27,7 +27,7 @@ function Blog() {
                     <div className='blog-section'>
                         <h1 className='blog-header'>Alex's Blog </h1>
                         <h2 className='quote'> Hello, and welcome to Alex's Blog</h2>
-                        <hr></hr>
+                        <hr style={{ margin: '5px 0 30px 0' }} />
                         {POSTS.map((post) => (<BlogPost title={post.title} text={post.text} imgs={post.imgs} imgAlts={post.imgAlts} />))}
                     </div>
                 </div>

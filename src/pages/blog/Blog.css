@@ -1,6 +1,8 @@
 .blog-section {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 768px;
+  padding-top: 10%;
+  padding-bottom: 12%;
 }
 .blog-post {
   margin-bottom: 20px;
@@ -9,6 +11,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 0.625rem 0 #353a3e0f,
+    0 0.125rem 0.25rem 0 #353a3e14;
 }
 .blog-title {
   font-size: 28px;
@@ -22,6 +28,9 @@
   line-height: 1.5;
   font-family: Montserrat, sans-serif;
   font-weight: 400;
+}
+.blog-image {
+  padding: 1rem;
 }
 .quote {
   padding-bottom: 2%;
