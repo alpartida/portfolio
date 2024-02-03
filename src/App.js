@@ -1,6 +1,5 @@
 import Homepage from './pages/homepage/Homepage';
 import About from './pages/about/About';
-import Work from './pages/work/Work';
 import Blog from './pages/blog/Blog';
 import {
   BrowserRouter,
@@ -13,7 +12,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path='/work' element={<Work />} />
         <Route path='/about' element={<About />} />
         <Route path='/blog' element={<Blog />} />
       </Routes>
