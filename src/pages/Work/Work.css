@@ -1,20 +1,21 @@
-.nav-items {
+.work-items {
   width: 50%;
   padding: 2em;
   align-self: center;
 }
 
-.nav-item {
+.work-link {
   font-family: "Bungee Shade", cursive;
   position: relative;
   z-index: 100;
   display: block;
   color: #1a1919;
-  font-size: 12vw;
+  font-size: 8vw;
   line-height: 1em;
   font-weight: 300;
   text-align: left;
   text-decoration: none;
+  margin-bottom: 2rem;
 }
 
 .info-section {
@@ -41,10 +42,6 @@ p {
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
-  flex: 0 auto;
-  margin-bottom: 40px;
-  padding-left: 20px;
-  padding-right: 15px;
 }
 
 .nav-line {
@@ -55,19 +52,16 @@ p {
   background-color: #1a1919;
 }
 
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.fa:hover {
-  opacity: 0.7;
-}
-
 a,
 a:visited {
   text-decoration: none;
   color: inherit;
+}
+
+.left-link {
+  flex: 0 auto;
+  margin-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 15px;
+  transform: rotate(-90deg);
 }

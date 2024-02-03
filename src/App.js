@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
 import Homepage from './pages/homepage/Homepage';
-import About from './pages/About';
-import Work from './pages/Work';
-import Blog from './pages/Blog';
-import { useNavigationType } from 'react-router';
+import About from './pages/about/About';
+import Work from './pages/Work/Work';
+import Blog from './pages/blog/Blog';
 import {
   BrowserRouter,
   Routes,
@@ -11,20 +9,13 @@ import {
 } from "react-router-dom";
 
 function App() {
-  const [aniamte, setAnimate] = useState(false);
-
-  useEffect(() => {
-    setAnimate(true);
-  }, []);
-
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Homepage animate={aniamte} />} />
-        <Route path={'Work'} element={<Work />} />
-        <Route path={'About'} element={<About />} />
-        <Route path={'Blog'} element={<Blog />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path='/work' element={<Work />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/blog' element={<Blog />} />
       </Routes>
     </BrowserRouter>
   );
