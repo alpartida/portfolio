@@ -4,6 +4,13 @@
   align-self: center;
 }
 
+.info-and-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .nav-item {
   font-family: "Bungee Shade", cursive;
   position: relative;
@@ -70,4 +77,11 @@ a,
 a:visited {
   text-decoration: none;
   color: inherit;
+}
+
+@media screen and (max-width: 700px) {
+  .info-and-nav {
+    flex-direction: column;
+    justify-content: center;
+  }
 }

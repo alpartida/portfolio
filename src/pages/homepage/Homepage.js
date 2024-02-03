@@ -23,18 +23,20 @@ const Homepage = () => {
                         <SocialLink class="fa fa-twitter" link="https://twitter.com/iamalexpartida" />
                         <div className="nav-line"></div>
                     </div>
-                    <div className="info-section">
-                        <h2>
-                            Alex Partida
-                        </h2>
-                        <p>Web Developer. Software Engineer. Designer.</p>
-                        <p>Creating beautiful and engaging digital experiences in Los Angeles, CA</p>
-                        <p>Currently working as a web developer at The Salt Lake Tribune.</p>
-                    </div>
-                    <div className="nav-items">
-                        <NavLink text="Work" link='/work' />
-                        <NavLink text="Blog" link='/blog' />
-                        <NavLink text="About" link='/about' />
+                    <div className='info-and-nav'>
+                        <div className="info-section">
+                            <h2>
+                                Alex Partida
+                            </h2>
+                            <p>Web Developer. Software Engineer. Designer.</p>
+                            <p>Creating beautiful and engaging digital experiences in Los Angeles, CA</p>
+                            <p>Currently working as a web developer at The Salt Lake Tribune.</p>
+                        </div>
+                        <div className="nav-items">
+                            <NavLink text="Work" link='/work' />
+                            <NavLink text="Blog" link='/blog' />
+                            <NavLink text="About" link='/about' />
+                        </div>
                     </div>
                 </div>
             </CSSTransition>

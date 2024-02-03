@@ -1,6 +1,6 @@
 import Homepage from './pages/homepage/Homepage';
 import About from './pages/about/About';
-import Work from './pages/Work/Work';
+import Work from './pages/work/Work';
 import Blog from './pages/blog/Blog';
 import {
   BrowserRouter,
