@@ -1,0 +1,158 @@
+---
+/**
+ * The rail down the left edge — the original site's signature:
+ * a hairline, the social icons, another hairline.
+ *
+ * The original pulled in all of Font Awesome 4.7 for three icons.
+ * These are inlined instead: same marks, no extra request.
+ */
+import { SITE } from '../config';
+
+const socials = [
+  {
+    label: 'LinkedIn',
+    href: SITE.linkedin,
+    path: 'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.65h.05A4.17 4.17 0 0 1 17.6 8.7c4 0 4.74 2.5 4.74 5.77V21h-4v-5.64c0-1.35-.03-3.08-1.9-3.08-1.9 0-2.2 1.46-2.2 2.98V21h-4V9Z',
+  },
+  {
+    label: 'GitHub',
+    href: SITE.github,
+    path: 'M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.86l-.01 2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z',
+  },
+  {
+    label: 'Twitter',
+    href: SITE.twitter,
+    path: 'M22 5.9c-.7.32-1.46.53-2.25.63.81-.49 1.43-1.26 1.72-2.18-.76.45-1.6.78-2.49.95a3.93 3.93 0 0 0-6.69 3.58A11.15 11.15 0 0 1 4.2 4.77a3.93 3.93 0 0 0 1.21 5.24c-.63-.02-1.23-.2-1.78-.48v.05a3.93 3.93 0 0 0 3.15 3.85c-.58.16-1.19.18-1.77.07a3.93 3.93 0 0 0 3.67 2.72A7.88 7.88 0 0 1 2 17.86a11.12 11.12 0 0 0 6.03 1.77c7.24 0 11.2-6 11.2-11.2l-.01-.51A8 8 0 0 0 22 5.9Z',
+  },
+];
+
+const { showHome = false } = Astro.props;
+---
+
+<aside class="rail" aria-label="Elsewhere">
+  <div class="rule" aria-hidden="true"></div>
+
+  {
+    showHome && (
+      <a href="/" class="rail__home">
+        Home
+      </a>
+    )
+  }
+
+  <ul class="rail__social">
+    {
+      socials.map((s) => (
+        <li>
+          <a href={s.href} rel="me noopener" aria-label={s.label}>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d={s.path} />
+            </svg>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="rule" aria-hidden="true"></div>
+</aside>
+
+<style>
+  .rail {
+    width: var(--rail-w);
+    flex: none;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(2rem, 5vh, 4.5rem);
+    padding-block: clamp(2rem, 5vh, 3.5rem);
+  }
+
+  /* The original rotated the "Home" link on inner pages. */
+  .rail__home {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: var(--t-sm);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: opacity 0.2s ease;
+  }
+
+  .rail__home:hover {
+    opacity: 0.6;
+  }
+
+  .rail__social {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.1rem, 3vh, 2rem);
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  /* inline-flex so the link shrink-wraps the icon. As a block it has
+     no intrinsic width in the row-direction flex the rail uses on small
+     screens, and the global `svg { max-width: 100% }` then clamps the
+     icon to zero. */
+  .rail__social a {
+    display: inline-flex;
+    color: var(--ink);
+    transition: opacity 0.2s ease;
+  }
+
+  .rail__social a:hover {
+    opacity: 0.6;
+  }
+
+  /* Both dimensions set explicitly: the global `svg { height: auto }`
+     collapses these to zero height inside the row-direction flex the
+     rail switches to on small screens. */
+  .rail__social svg {
+    --icon: clamp(18px, 1.5vw, 22px);
+    width: var(--icon);
+    height: var(--icon);
+    max-width: none;
+    fill: currentColor;
+  }
+
+  /* Below the split breakpoint the rail would eat the screen, so
+     it lies down into a strip across the top instead. */
+  @media (max-width: 860px) {
+    .rail {
+      width: 100%;
+      height: auto;
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--s-2);
+      padding: var(--s-2) var(--gutter);
+    }
+
+    .rail .rule {
+      width: 100%;
+      height: var(--rule-w);
+      flex: 1 1 auto;
+    }
+
+    .rail__home {
+      writing-mode: horizontal-tb;
+      transform: none;
+      order: -1;
+    }
+
+    .rail__social {
+      flex-direction: row;
+      margin: 0;
+      gap: var(--s-3);
+    }
+  }
+</style>

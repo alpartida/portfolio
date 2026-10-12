@@ -46,38 +46,33 @@ const steps = [
 <BaseLayout
   title="Services"
   description="How I work with small businesses and independent practitioners: fixed-price projects, design and build, and a handover that leaves you able to update your own site."
+  showHome={true}
 >
-  <section class="page-head">
-    <div class="container">
-      <p class="eyebrow">Services</p>
-      <h1>How a project runs.</h1>
-      <p class="lede">
-        Fixed price, agreed in writing before anything starts. No hourly
-        surprises, and no site you need me to maintain forever.
-      </p>
-    </div>
-  </section>
+  <div class="column">
+    <h1 class="page-title">Services</h1>
+    <p class="quote svc__lede">Fixed price, agreed before anything starts.</p>
+    <p class="svc__sub">
+      No hourly surprises, and no site you need me to maintain forever.
+    </p>
 
-  <section class="section">
-    <div class="container">
-      <h2>What I take on</h2>
+    <section class="svc__section">
+      <h2 class="eyebrow">What I take on</h2>
       <div class="offerings">
         {
           offerings.map((o) => (
             <div class="offering">
-              <h3>{o.title}</h3>
-              <p>{o.body}</p>
+              <h3 class="offering__title">{o.title}</h3>
+              <p class="offering__body">{o.body}</p>
               <p class="offering__fit">{o.good}</p>
             </div>
           ))
         }
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>The process</h2>
+    <section class="svc__section">
+      <div class="rule--h" aria-hidden="true"></div>
+      <h2 class="eyebrow svc__head">The process</h2>
       <ol class="steps">
         {
           steps.map((s) => (
@@ -91,13 +86,12 @@ const steps = [
           ))
         }
       </ol>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>What it costs</h2>
-      <div class="prose costs">
+    <section class="svc__section">
+      <div class="rule--h" aria-hidden="true"></div>
+      <h2 class="eyebrow svc__head">What it costs</h2>
+      <div class="prose">
         <p>
           Every project is quoted as a <strong>fixed price</strong>, agreed in
           writing before any work starts. A three-page site for a yoga teacher
@@ -124,12 +118,11 @@ const steps = [
           </li>
         </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>What I don't do</h2>
+    <section class="svc__section">
+      <div class="rule--h" aria-hidden="true"></div>
+      <h2 class="eyebrow svc__head">What I don't do</h2>
       <div class="prose">
         <p>
           Worth saying plainly, so neither of us wastes a call: I don't take on
@@ -139,59 +132,68 @@ const steps = [
           better served by someone who specialises in them.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section cta">
-    <div class="container">
-      <h2 class="cta__title">Start with a conversation.</h2>
-      <p class="lede">
+    <section class="svc__section">
+      <div class="rule--h" aria-hidden="true"></div>
+      <p class="quote svc__cta-q">Start with a conversation.</p>
+      <p class="svc__sub">
         Half an hour, free, no pitch. Worst case you leave knowing what you
         actually need.
       </p>
-      <a href="/contact" class="btn btn--primary">Get in touch</a>
-    </div>
-  </section>
+      <a href="/contact" class="btn svc__btn">Get in touch</a>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .page-head {
-    padding-block: clamp(2.5rem, 8vw, 5.5rem) 0;
-  }
-
-  .page-head h1 {
+  .svc__lede {
     margin-top: var(--s-2);
+    max-width: 20ch;
   }
 
-  .page-head .lede {
-    margin-top: var(--s-3);
-  }
-
-  .offerings {
-    margin-top: var(--s-4);
-    display: grid;
-    gap: var(--s-4);
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  }
-
-  .offering h3 {
-    font-size: var(--step-1);
-  }
-
-  .offering p {
+  .svc__sub {
     margin-top: var(--s-2);
+    max-width: 52ch;
     color: var(--ink-soft);
   }
 
+  .svc__section {
+    margin-top: clamp(2.5rem, 7vw, var(--s-5));
+  }
+
+  .svc__head {
+    margin-top: var(--s-3);
+    display: block;
+  }
+
+  .offerings {
+    margin-top: var(--s-3);
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .offering__title {
+    font-size: var(--t-lg);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .offering__body {
+    margin-top: var(--s-1);
+    max-width: 58ch;
+  }
+
   .offering__fit {
-    font-size: var(--step--1);
-    color: var(--clay) !important;
+    margin-top: var(--s-1);
+    font-size: var(--t-sm);
+    line-height: 1.8;
+    color: var(--ink-soft);
   }
 
   .steps {
-    margin-top: var(--s-4);
+    margin-top: var(--s-3);
     list-style: none;
-    padding: 0;
     display: grid;
     gap: var(--s-4);
   }
@@ -199,21 +201,22 @@ const steps = [
   .step {
     display: flex;
     gap: var(--s-3);
-    align-items: start;
+    align-items: baseline;
     max-width: 62ch;
   }
 
   .step__n {
-    font-family: var(--display);
-    font-size: var(--step-2);
-    color: var(--accent);
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.4rem);
     line-height: 1;
     flex: none;
-    font-variant-numeric: tabular-nums;
+    color: var(--ink);
   }
 
   .step__title {
-    font-size: var(--step-1);
+    font-size: var(--t-lg);
+    font-weight: 600;
+    letter-spacing: 1px;
   }
 
   .step__body {
@@ -221,19 +224,12 @@ const steps = [
     color: var(--ink-soft);
   }
 
-  .costs {
-    margin-top: var(--s-3);
+  .svc__cta-q {
+    margin-top: var(--s-4);
+    max-width: 18ch;
   }
 
-  .cta__title {
-    max-width: 22ch;
-  }
-
-  .cta .lede {
-    margin-top: var(--s-3);
-  }
-
-  .cta .btn {
+  .svc__btn {
     margin-top: var(--s-4);
   }
 </style>

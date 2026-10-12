@@ -11,17 +11,18 @@ export interface Props {
 const { href, client, title, summary, year, stack } = Astro.props;
 ---
 
-<article class="work-card">
-  <div class="work-card__meta">
-    <span class="eyebrow">{client}</span>
-    <span class="work-card__year">{year}</span>
-  </div>
+<article class="wc">
+  <p class="meta wc__meta">
+    <span>{client}</span>
+    <span aria-hidden="true">·</span>
+    <span>{year}</span>
+  </p>
 
-  <h3 class="work-card__title">
+  <h3 class="wc__title">
     <a href={href}>{title}</a>
   </h3>
 
-  <p class="work-card__summary">{summary}</p>
+  <p class="wc__summary">{summary}</p>
 
   <ul class="tags">
     {stack.slice(0, 4).map((s) => <li class="tag">{s}</li>)}
@@ -29,56 +30,46 @@ const { href, client, title, summary, year, stack } = Astro.props;
 </article>
 
 <style>
-  .work-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
+  .wc {
     padding-block: var(--s-4);
-    border-top: 1px solid var(--rule);
+    border-bottom: var(--rule-w) solid var(--rule-soft);
   }
 
-  .work-card__meta {
+  .wc__meta {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--s-2);
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
-  .work-card__year {
-    font-size: var(--step--1);
-    color: var(--ink-soft);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .work-card__title {
-    font-size: var(--step-2);
+  /* Montserrat, not Bungee. The display face is reserved for short
+     words — a full sentence set in it is a wall, not a headline. */
+  .wc__title {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: var(--t-lg);
+    line-height: 1.45;
+    letter-spacing: var(--track);
+    margin-top: var(--s-1);
     max-width: 34ch;
   }
 
-  .work-card__title a {
-    color: var(--ink);
-    text-decoration: none;
-  }
-
-  .work-card__title a:hover {
-    color: var(--accent);
-  }
-
-  /* Make the whole heading row feel clickable without nesting links. */
-  .work-card__title a::after {
-    content: '\2192';
-    color: var(--accent);
+  .wc__title a {
     display: inline-block;
-    margin-left: 0.3em;
-    transition: transform 0.15s ease;
+    transition: opacity 0.2s ease, transform 0.25s ease;
   }
 
-  .work-card__title a:hover::after {
-    transform: translateX(3px);
+  .wc__title a:hover {
+    opacity: 0.62;
+    transform: translateX(0.05em);
   }
 
-  .work-card__summary {
-    color: var(--ink-soft);
+  .wc__summary {
+    margin-top: var(--s-2);
     max-width: 58ch;
+    color: var(--ink-soft);
+  }
+
+  .wc .tags {
+    margin-top: var(--s-2);
   }
 </style>

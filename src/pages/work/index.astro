@@ -1,63 +1,68 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import WorkCard from '../../components/WorkCard.astro';
 
 const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
+
+// Longest word decides the type size, so a long client name wraps
+// onto another line instead of running off the right edge.
+const longestWord = (s: string) =>
+  Math.max(...s.split(/\s+/).map((w) => w.length));
 ---
 
 <BaseLayout
   title="Work"
-  description="Case studies: a yoga teaching site driven by a Google Sheet, a Los Angeles tax practice, and three years of newsletter, subscription and revenue work at The Salt Lake Tribune."
+  description="Case studies: a Los Angeles tax practice, and newsletter, subscription and revenue work at The Salt Lake Tribune."
+  showHome={true}
+  fill={true}
 >
-  <section class="page-head">
-    <div class="container">
-      <p class="eyebrow">Work</p>
-      <h1>Things I've built, and why they're built that way.</h1>
-      <p class="lede">
-        Each of these is a real client or employer project. The interesting part
-        is rarely the technology — it's the constraint that shaped it.
+  <section class="split">
+    <div class="split__text">
+      <h1 class="page-title">Work</h1>
+      <p>
+        This is a showcase of my work across web design, web apps and product —
+        for freelance clients and in a newsroom.
+      </p>
+      <p>
+        The world of digital design and web development is constantly evolving
+        and so has my role over the last few years. I'm still learning and
+        gaining new skills every day.
+      </p>
+      <p>
+        The interesting part of each of these is rarely the technology. It's the
+        constraint that shaped it.
       </p>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="work-list">
-        {
-          work.map((item) => (
-            <WorkCard
+    <nav class="split__display" aria-label="Case studies">
+      {
+        work.map((item) => (
+          <span class="wl">
+            <a
               href={`/work/${item.id}/`}
-              client={item.data.client}
-              title={item.data.title}
-              summary={item.data.summary}
-              year={item.data.year}
-              stack={item.data.stack}
-            />
-          ))
-        }
-      </div>
-    </div>
+              class="big-link big-link--md"
+              style={`--chars:${longestWord(item.data.client)}`}
+            >
+              {item.data.client}
+            </a>
+            <span class="meta wl__meta">{item.data.year}</span>
+          </span>
+        ))
+      }
+    </nav>
   </section>
 </BaseLayout>
 
 <style>
-  .page-head {
-    padding-block: clamp(2.5rem, 8vw, 5.5rem) 0;
+  .wl {
+    display: block;
+    margin-bottom: var(--s-3);
   }
 
-  .page-head h1 {
-    margin-top: var(--s-2);
-    max-width: 26ch;
-  }
-
-  .page-head .lede {
-    margin-top: var(--s-3);
-  }
-
-  .work-list {
-    border-bottom: 1px solid var(--rule);
+  .wl__meta {
+    display: block;
+    margin-top: -0.4em;
   }
 </style>

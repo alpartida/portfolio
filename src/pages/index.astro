@@ -8,161 +8,127 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
 
-const services = [
-  {
-    title: 'A new site, start to finish',
-    body: 'Design and build for a practice or small business that needs a real web presence — written, structured and styled from scratch, not dropped into a theme.',
-  },
-  {
-    title: 'Rescuing a site you can’t update',
-    body: 'If changing your own hours means emailing a developer, that’s fixable. I rebuild sites so the things that change often are the things you control.',
-  },
-  {
-    title: 'Making an existing site faster and findable',
-    body: 'Performance, accessibility and the technical side of search — the work that decides whether people reach your site at all.',
-  },
+// Longest word decides the type size, so a word can never outrun its column.
+const longestWord = (s: string) =>
+  Math.max(...s.split(/\s+/).map((w) => w.length));
+
+// The giant words are the navigation, the way the original site worked.
+const bigNav = [
+  { text: 'Work', href: '/work' },
+  { text: 'Services', href: '/services' },
+  { text: 'Contact', href: '/contact' },
 ];
 ---
 
-<BaseLayout title="Alex Partida" description={SITE.description}>
-  <section class="hero">
-    <div class="container">
-      <p class="eyebrow">Freelance web developer &amp; designer &middot; Los Angeles</p>
-      <h1 class="hero__title">
-        Websites small businesses can actually run themselves.
-      </h1>
-      <p class="lede hero__lede">
-        I'm Alex. I build fast, accessible sites for independent practitioners
-        and small businesses — then hand them over with documentation written
-        for a human being, not a developer.
+<BaseLayout
+  title="Alex Partida"
+  description={SITE.description}
+  showWordmark={false}
+  fill={true}
+>
+  <section class="split">
+    <div class="split__text">
+      <h1 class="intro__name">Alex Partida</h1>
+      <p>Web Developer. Designer. Los Angeles.</p>
+      <p>
+        Creating beautiful and engaging digital experiences — and building
+        websites that small businesses can actually run themselves.
       </p>
-      <div class="cluster hero__actions">
-        <a href="/contact" class="btn btn--primary">Start a project</a>
-        <a href="/work" class="btn btn--ghost">See the work</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>Selected work</h2>
-        <a href="/work" class="section-head__link">All work</a>
-      </div>
-      <div class="work-list">
-        {
-          work.slice(0, 3).map((item) => (
-            <WorkCard
-              href={`/work/${item.id}/`}
-              client={item.data.client}
-              title={item.data.title}
-              summary={item.data.summary}
-              year={item.data.year}
-              stack={item.data.stack}
-            />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>What I take on</h2>
-      <div class="services-grid">
-        {
-          services.map((s) => (
-            <div class="card">
-              <h3 class="service__title">{s.title}</h3>
-              <p class="service__body">{s.body}</p>
-            </div>
-          ))
-        }
-      </div>
-      <p class="services-note">
-        <a href="/services">How a project runs, and what it costs &rarr;</a>
+      <p>
+        Currently a web developer at The Salt Lake Tribune, and taking on a
+        small number of freelance projects.
       </p>
     </div>
+
+    <nav class="split__display" aria-label="Sections">
+      {
+        bigNav.map((l) => (
+          <a
+            href={l.href}
+            class="big-link"
+            style={`--chars:${longestWord(l.text)}`}
+          >
+            {l.text}
+          </a>
+        ))
+      }
+    </nav>
   </section>
 
-  <section class="section cta">
-    <div class="container">
-      <h2 class="cta__title">Have something in mind?</h2>
-      <p class="lede">
-        Tell me what you're trying to build and what's in the way. I'll tell you
-        honestly whether I'm the right person for it.
-      </p>
-      <a href="/contact" class="btn btn--primary">Get in touch</a>
+  <section class="home-work">
+    <div class="rule--h" aria-hidden="true"></div>
+    <h2 class="eyebrow home-work__head">Selected work</h2>
+    <div>
+      {
+        work.slice(0, 3).map((item) => (
+          <WorkCard
+            href={`/work/${item.id}/`}
+            client={item.data.client}
+            title={item.data.title}
+            summary={item.data.summary}
+            year={item.data.year}
+            stack={item.data.stack}
+          />
+        ))
+      }
     </div>
+    <p class="home-work__more">
+      <a href="/work" class="link-u">All work</a>
+    </p>
+  </section>
+
+  <section class="home-cta">
+    <div class="rule--h" aria-hidden="true"></div>
+    <p class="quote home-cta__quote">Have something in mind?</p>
+    <p class="home-cta__body">
+      Tell me what you're trying to build and what's in the way. I'll tell you
+      honestly whether I'm the right person for it.
+    </p>
+    <a href="/contact" class="btn">Start a project</a>
   </section>
 </BaseLayout>
 
 <style>
-  .hero {
-    padding-block: clamp(3.5rem, 11vw, 8rem);
+  /* The name sits at body size, as it did originally — the display
+     type on the right is what carries the page. */
+  .intro__name {
+    font-size: var(--t-0);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 
-  .hero__title {
-    margin-top: var(--s-2);
-    max-width: 24ch;
+  .home-work {
+    padding-block: clamp(2.5rem, 7vw, var(--s-5)) 0;
   }
 
-  .hero__lede {
+  .home-work__head {
     margin-top: var(--s-3);
   }
 
-  .hero__actions {
+  .home-work__more {
+    margin-top: var(--s-3);
+    font-size: var(--t-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .home-cta {
+    padding-top: clamp(2.5rem, 7vw, var(--s-5));
+  }
+
+  .home-cta__quote {
     margin-top: var(--s-4);
+    max-width: 18ch;
   }
 
-  .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--s-3);
-    flex-wrap: wrap;
-    margin-bottom: var(--s-3);
-  }
-
-  .section-head__link {
-    font-size: var(--step-0);
-  }
-
-  /* The first card draws its own top rule; the list closes with one. */
-  .work-list {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .services-grid {
-    margin-top: var(--s-4);
-    display: grid;
-    gap: var(--s-3);
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  }
-
-  .service__title {
-    font-size: var(--step-1);
-  }
-
-  .service__body {
+  .home-cta__body {
     margin-top: var(--s-2);
+    max-width: 52ch;
     color: var(--ink-soft);
-    font-size: var(--step-0);
   }
 
-  .services-note {
-    margin-top: var(--s-3);
-  }
-
-  .cta__title {
-    max-width: 20ch;
-  }
-
-  .cta .lede {
-    margin-top: var(--s-3);
-  }
-
-  .cta .btn {
+  .home-cta .btn {
     margin-top: var(--s-4);
   }
 </style>

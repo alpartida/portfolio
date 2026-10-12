@@ -6,35 +6,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="Page not found"
   description="That page doesn't exist."
   noindex={true}
+  showHome={true}
 >
-  <section class="centered">
-    <div class="container">
-      <p class="eyebrow">404</p>
-      <h1>That page isn't here.</h1>
-      <p class="lede">
-        It may have moved when I rebuilt this site. The work and the contact
-        form are both one click away.
-      </p>
-      <div class="cluster actions">
-        <a href="/work" class="btn btn--primary">See the work</a>
-        <a href="/" class="btn btn--ghost">Back home</a>
-      </div>
+  <div class="column">
+    <h1 class="page-title">404</h1>
+    <p class="quote nf__q">That page isn't here.</p>
+    <p class="nf__sub">
+      It may have moved when I rebuilt this site. The work and the contact form
+      are both one click away.
+    </p>
+    <div class="cluster nf__actions">
+      <a href="/work" class="btn">See the work</a>
+      <a href="/" class="link-u nf__link">Back home</a>
     </div>
-  </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .centered {
-    padding-block: clamp(4rem, 14vw, 9rem);
-  }
-  h1 {
+  .nf__q {
     margin-top: var(--s-2);
-    max-width: 20ch;
   }
-  .lede {
-    margin-top: var(--s-3);
+  .nf__sub {
+    margin-top: var(--s-2);
+    max-width: 50ch;
+    color: var(--ink-soft);
   }
-  .actions {
+  .nf__actions {
     margin-top: var(--s-4);
+  }
+  .nf__link {
+    font-size: var(--t-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 </style>

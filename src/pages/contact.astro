@@ -6,20 +6,17 @@ import { SITE } from '../config';
 <BaseLayout
   title="Contact"
   description="Tell me about your project. Fixed-price web design and development for small businesses and independent practitioners in Los Angeles and remote."
+  showHome={true}
 >
-  <section class="page-head">
-    <div class="container">
-      <p class="eyebrow">Contact</p>
-      <h1>Tell me what you're trying to build.</h1>
-      <p class="lede">
-        The more you can tell me about the problem, the more useful my first
-        reply will be. I answer everything within two business days.
-      </p>
-    </div>
-  </section>
+  <div class="column">
+    <h1 class="page-title">Contact</h1>
+    <p class="quote ct__lede">Tell me what you're trying to build.</p>
+    <p class="ct__sub">
+      The more you can tell me about the problem, the more useful my first reply
+      will be. I answer everything within two business days.
+    </p>
 
-  <section class="section">
-    <div class="container contact-layout">
+    <div class="ct__layout">
       <!--
         Netlify Forms: the `data-netlify` attribute is what registers this form
         on deploy. Submissions appear under Forms in the Netlify dashboard;
@@ -46,13 +43,7 @@ import { SITE } from '../config';
 
         <div class="field">
           <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-          />
+          <input id="email" name="email" type="email" autocomplete="email" required />
         </div>
 
         <div class="field">
@@ -62,13 +53,7 @@ import { SITE } from '../config';
 
         <div class="field">
           <label for="website">Current website <span class="opt">(optional)</span></label>
-          <input
-            id="website"
-            name="website"
-            type="url"
-            inputmode="url"
-            placeholder="https://"
-          />
+          <input id="website" name="website" type="url" inputmode="url" placeholder="https://" />
         </div>
 
         <div class="field">
@@ -114,62 +99,55 @@ import { SITE } from '../config';
           <textarea id="message" name="message" rows="6" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn--primary">Send enquiry</button>
+        <button type="submit" class="btn">Send enquiry</button>
       </form>
 
       <aside class="aside">
-        <div class="card stack-sm">
-          <h2 class="aside__title">What happens next</h2>
-          <ol class="aside__list">
-            <li>I reply within two business days.</li>
-            <li>If it looks like a fit, we talk for half an hour. Free.</li>
-            <li>You get a fixed-price proposal in writing before anything starts.</li>
-          </ol>
-        </div>
+        <h2 class="eyebrow">What happens next</h2>
+        <ol class="aside__list">
+          <li>I reply within two business days.</li>
+          <li>If it looks like a fit, we talk for half an hour. Free.</li>
+          <li>You get a fixed-price proposal in writing before anything starts.</li>
+        </ol>
 
-        <div class="stack-sm aside__block">
-          <h2 class="aside__title">Where I work</h2>
-          <p class="aside__note">
-            Based in {SITE.location}, working with clients here and remotely.
-            Most projects run entirely over email and a couple of calls.
-          </p>
-        </div>
+        <h2 class="eyebrow aside__head">Where I work</h2>
+        <p class="aside__note">
+          Based in {SITE.location}, working with clients here and remotely. Most
+          projects run entirely over email and a couple of calls.
+        </p>
 
-        <div class="stack-sm aside__block">
-          <h2 class="aside__title">Elsewhere</h2>
-          <ul class="aside__list aside__list--plain">
-            <li><a href={SITE.linkedin}>LinkedIn</a></li>
-            <li><a href={SITE.github}>GitHub</a></li>
-          </ul>
-        </div>
+        <h2 class="eyebrow aside__head">Elsewhere</h2>
+        <ul class="aside__plain">
+          <li><a href={SITE.linkedin} class="link-u">LinkedIn</a></li>
+          <li><a href={SITE.github} class="link-u">GitHub</a></li>
+        </ul>
       </aside>
     </div>
-  </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .page-head {
-    padding-block: clamp(2.5rem, 8vw, 5.5rem) 0;
-  }
-
-  .page-head h1 {
+  .ct__lede {
     margin-top: var(--s-2);
-    max-width: 26ch;
+    max-width: 22ch;
   }
 
-  .page-head .lede {
-    margin-top: var(--s-3);
+  .ct__sub {
+    margin-top: var(--s-2);
+    max-width: 52ch;
+    color: var(--ink-soft);
   }
 
-  .contact-layout {
+  .ct__layout {
+    margin-top: clamp(2.5rem, 7vw, var(--s-5));
     display: grid;
     gap: var(--s-5);
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     align-items: start;
   }
 
   @media (max-width: 820px) {
-    .contact-layout {
+    .ct__layout {
       grid-template-columns: 1fr;
       gap: var(--s-4);
     }
@@ -178,84 +156,112 @@ import { SITE } from '../config';
   .form {
     display: grid;
     gap: var(--s-3);
-    max-width: 34rem;
+    max-width: 32rem;
   }
 
   .field {
     display: grid;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   label {
-    font-size: var(--step--1);
+    font-size: var(--t-sm);
     font-weight: 500;
-    letter-spacing: 0.02em;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.6;
   }
 
   .opt {
     font-weight: 400;
+    text-transform: none;
+    letter-spacing: var(--track);
     color: var(--ink-soft);
   }
 
+  /* Underlines rather than boxes — closer to the original's flat,
+     hairline-driven look than a bordered input would be. */
   input,
   select,
   textarea {
-    font-family: inherit;
-    font-size: var(--step-0);
+    font-family: var(--body);
+    font-size: var(--t-0);
+    letter-spacing: var(--track);
     color: var(--ink);
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 0.7em 0.85em;
+    background: transparent;
+    border: none;
+    border-bottom: var(--rule-w) solid var(--ink-soft);
+    border-radius: 0;
+    padding: 0.6em 0.1em;
     width: 100%;
-    transition: border-color 0.15s ease;
+    transition: border-color 0.2s ease;
+  }
+
+  select {
+    /* Keep the native arrow visible against a transparent field. */
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: right 0.75em top 55%, right 0.3em top 55%;
+    background-size: 0.4em 0.4em, 0.4em 0.4em;
+    background-repeat: no-repeat;
+    padding-right: 1.8em;
   }
 
   input:hover,
   select:hover,
-  textarea:hover {
-    border-color: var(--ink-soft);
+  textarea:hover,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-bottom-color: var(--ink);
   }
 
   textarea {
     resize: vertical;
-    line-height: 1.55;
+    line-height: 1.8;
+    border: var(--rule-w) solid var(--ink-soft);
+    padding: 0.7em 0.8em;
   }
 
   .hint {
-    font-size: var(--step--1);
+    font-size: var(--t-sm);
+    line-height: 1.7;
     color: var(--ink-soft);
   }
 
   .form .btn {
     justify-self: start;
-    margin-top: var(--s-1);
+    margin-top: var(--s-2);
   }
 
-  .aside__title {
-    font-size: var(--step-1);
+  .aside__list {
+    margin-top: var(--s-2);
+    padding-left: 1.3em;
+    color: var(--ink-soft);
+    font-size: var(--t-sm);
+    line-height: 1.9;
   }
 
-  .aside__block {
+  .aside__head {
+    display: block;
     margin-top: var(--s-4);
   }
 
   .aside__note {
-    font-size: var(--step--1);
+    margin-top: var(--s-2);
+    font-size: var(--t-sm);
+    line-height: 1.9;
     color: var(--ink-soft);
   }
 
-  .aside__list {
-    color: var(--ink-soft);
-    padding-left: 1.2em;
-  }
-
-  .aside__list li + li {
-    margin-top: var(--s-1);
-  }
-
-  .aside__list--plain {
+  .aside__plain {
+    margin-top: var(--s-2);
     list-style: none;
-    padding-left: 0;
+    font-size: var(--t-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: grid;
+    gap: var(--s-1);
   }
 </style>

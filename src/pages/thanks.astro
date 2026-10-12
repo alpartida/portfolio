@@ -2,35 +2,36 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Thanks" description="Your enquiry is in." noindex={true}>
-  <section class="centered">
-    <div class="container">
-      <p class="eyebrow">Sent</p>
-      <h1>Thanks — that's in.</h1>
-      <p class="lede">
-        I'll read it properly and reply within two business days. If it's
-        urgent, reply to my first email and say so — it'll jump the queue.
-      </p>
-      <div class="cluster actions">
-        <a href="/work" class="btn btn--ghost">Read a case study</a>
-        <a href="/" class="btn btn--ghost">Back home</a>
-      </div>
+<BaseLayout title="Thanks" description="Your enquiry is in." noindex={true} showHome={true}>
+  <div class="column">
+    <h1 class="page-title">Thanks</h1>
+    <p class="quote th__q">That's in.</p>
+    <p class="th__sub">
+      I'll read it properly and reply within two business days. If it's urgent,
+      reply to my first email and say so — it'll jump the queue.
+    </p>
+    <div class="cluster th__actions">
+      <a href="/work" class="btn btn--ghost">Read a case study</a>
+      <a href="/" class="link-u th__link">Back home</a>
     </div>
-  </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .centered {
-    padding-block: clamp(4rem, 14vw, 9rem);
-  }
-  h1 {
+  .th__q {
     margin-top: var(--s-2);
-    max-width: 20ch;
   }
-  .lede {
-    margin-top: var(--s-3);
+  .th__sub {
+    margin-top: var(--s-2);
+    max-width: 50ch;
+    color: var(--ink-soft);
   }
-  .actions {
+  .th__actions {
     margin-top: var(--s-4);
+  }
+  .th__link {
+    font-size: var(--t-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 </style>

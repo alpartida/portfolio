@@ -9,48 +9,42 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
 
 <BaseLayout
   title="About"
-  description="Alex Partida is a web developer and designer in Los Angeles. Apparel production manager turned developer, three years on the web team of a daily newspaper, now building sites for small businesses and independent practitioners."
+  description="Alex Partida is a web developer and designer in Los Angeles. Apparel production manager turned developer, on the web team of a daily newspaper, building sites for small businesses and independent practitioners."
+  showHome={true}
 >
-  <section class="page-head">
-    <div class="container about-head">
-      <div>
-        <p class="eyebrow">About</p>
-        <h1>I came to this work from running production floors.</h1>
-        <p class="lede">
-          Which turns out to be useful training for building things small
-          businesses have to live with.
-        </p>
-      </div>
-      <Image
-        src={portrait}
-        alt="Alex Partida"
-        class="portrait"
-        widths={[320, 480, 640]}
-        sizes="(max-width: 760px) 60vw, 320px"
-        loading="eager"
-      />
-    </div>
-  </section>
+  <div class="about">
+    <!-- The portrait bleeds off the right edge, as it did originally. -->
+    <Image
+      src={portrait}
+      alt="Alex Partida"
+      class="about__portrait"
+      widths={[320, 480, 720]}
+      sizes="(max-width: 860px) 40vw, 360px"
+      loading="eager"
+    />
 
-  <section class="section">
-    <div class="container">
-      <div class="prose">
+    <div class="column about__col">
+      <h1 class="page-title">About</h1>
+      <p class="quote">From Apparel to Tech</p>
+
+      <div class="prose about__prose">
         <p>
-          Before I wrote software I was an apparel production manager in Los
-          Angeles — schedules, vendors, margins, and the specific stress of a
-          deadline that cannot move. I changed careers through a coding
-          bootcamp and a web development certificate program at UC Davis
-          Extension, and I have been building for the web professionally since
+          Hi 👋 — welcome to my portfolio. I'm an apparel production manager
+          turned web developer. Before I wrote software I ran production in Los
+          Angeles: schedules, vendors, margins, and the specific stress of a
+          deadline that cannot move. I changed careers through a six-month
+          coding bootcamp and a web development certificate at UC Davis
+          Extension, and I've been building for the web professionally since
           2021.
         </p>
         <p>
           I'm a web developer at <strong>The Salt Lake Tribune</strong>, a
-          nonprofit daily newspaper, where I've been since 2021. I migrated
-          their newsletter platform from Mailchimp to Iterable, build the
-          subscription, donation and sponsorship features that fund the
-          newsroom, and work on the bill tracker readers use to follow the Utah
-          legislature. Shipping to an audience that notices the moment something
-          breaks is a good education.
+          nonprofit daily newspaper. I migrated their newsletter platform from
+          Mailchimp to Iterable, build the subscription, donation and
+          sponsorship features that fund the newsroom, and work on the bill
+          tracker readers use to follow the Utah legislature. The Tribune being
+          a nonprofit makes the work feel like it matters, and shipping to an
+          audience that notices the moment something breaks is a good education.
         </p>
         <p>
           Alongside that I take on a small number of freelance projects for
@@ -68,16 +62,19 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
           opening hours.
         </p>
         <p>
-          So that's what I optimise for. When I built Christine's yoga site, the
-          interesting decision wasn't the design — it was putting her class
+          So that's what I optimise for. The most interesting decision on a
+          recent project wasn't the design — it was putting the client's class
           schedule in a Google Sheet she owns, so she posts her own dates from
           her phone without calling me. Every project ends with documentation
           written for the person who has to use it.
         </p>
         <p>
-          I also care a lot about sites being fast and accessible, which is less
-          a moral position than a practical one: a slow site on a phone on a bad
-          connection is a site nobody reads.
+          I'm skilled in HTML, CSS, JavaScript, React, WordPress and Adobe
+          Photoshop, and I care a lot about sites being fast and accessible —
+          less a moral position than a practical one. A slow site on a phone on
+          a bad connection is a site nobody reads. Have a look at my <a
+            href="/work">work</a
+          > or find me on <a href="https://github.com/alpartida">GitHub</a>.
         </p>
 
         <h2>Away from the keyboard</h2>
@@ -91,10 +88,10 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
         <p>
           Weekends are horses, the piano in the living room, and all four of us
           reading completely different books in the same room. Learning to code
-          changed my life in the obvious ways, and also in the one I didn't
-          expect: I met Zach on the way through it. My daughter watches her mom
-          work in a field without many women in it, which I think about more
-          than I expected to.
+          changed my life in the obvious ways, and also in one I didn't expect: I
+          met Zach on the way through it. My daughter watches her mom work in a
+          field without many women in it, which I think about more than I
+          expected to.
         </p>
       </div>
 
@@ -104,7 +101,7 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
             src={family}
             alt="Alex with her family in Los Angeles"
             widths={[320, 560, 760]}
-            sizes="(max-width: 760px) 90vw, 360px"
+            sizes="(max-width: 760px) 90vw, 340px"
             loading="lazy"
           />
         </figure>
@@ -113,7 +110,7 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
             src={otis}
             alt="Otis, a miniature poodle"
             widths={[320, 560]}
-            sizes="(max-width: 760px) 44vw, 240px"
+            sizes="(max-width: 760px) 44vw, 230px"
             loading="lazy"
           />
         </figure>
@@ -122,92 +119,89 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
             src={meredithAndFiru}
             alt="Meredith Grey and Firulais, two rescued cats"
             widths={[320, 560]}
-            sizes="(max-width: 760px) 44vw, 240px"
+            sizes="(max-width: 760px) 44vw, 230px"
             loading="lazy"
           />
         </figure>
       </div>
-    </div>
-  </section>
 
-  <section class="section cta">
-    <div class="container">
-      <h2 class="cta__title">Working on something?</h2>
-      <p class="lede">
-        I'd like to hear about it — and I'll tell you straight if I'm not the
-        right fit.
+      <p class="about__cv-note">
+        For a full list of my work experience, download my résumé below.
       </p>
-      <div class="cluster cta__actions">
-        <a href="/contact" class="btn btn--primary">Get in touch</a>
-        <a href="/AlexPartidaResume.pdf" class="btn btn--ghost">Résumé (PDF)</a>
+      <div class="cluster about__actions">
+        <a href="/AlexPartidaResume.pdf" class="btn" download>My CV</a>
+        <a href="/contact" class="link-u about__link">Start a project</a>
       </div>
     </div>
-  </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .page-head {
-    padding-block: clamp(2.5rem, 8vw, 5.5rem) 0;
+  .about {
+    position: relative;
   }
 
-  .about-head {
-    display: flex;
-    gap: var(--s-4);
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .about__col {
+    position: relative;
+    z-index: 2;
   }
 
-  .about-head > div {
-    flex: 1 1 22rem;
-  }
-
-  .about-head h1 {
-    margin-top: var(--s-2);
-    max-width: 22ch;
-  }
-
-  .about-head .lede {
-    margin-top: var(--s-3);
-  }
-
-  .portrait {
-    width: min(320px, 60vw);
+  /* Originally absolutely positioned and bleeding off the right. Kept,
+     but clipped to the viewport so it can't create a scrollbar. */
+  .about__portrait {
+    position: absolute;
+    top: 0;
+    right: calc(var(--gutter) * -1);
+    width: min(360px, 34vw);
     height: auto;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--rule);
-    flex: none;
+    z-index: 1;
+  }
+
+  .about__prose,
+  .about__col .quote {
+    max-width: 44ch;
+  }
+
+  @media (max-width: 860px) {
+    .about__portrait {
+      width: 38vw;
+      opacity: 0.55;
+      right: 0;
+    }
+
+    .about__prose,
+    .about__col .quote {
+      max-width: none;
+    }
   }
 
   .gallery {
     margin-top: var(--s-5);
     display: grid;
-    gap: var(--s-3);
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  }
-
-  .gallery figure {
-    margin: 0;
+    gap: var(--s-2);
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   }
 
   .gallery img {
-    border-radius: var(--radius);
-    border: 1px solid var(--rule);
+    border: var(--rule-w) solid var(--rule-soft);
     width: 100%;
     height: 100%;
     object-fit: cover;
     aspect-ratio: 4 / 3;
   }
 
-  .cta__title {
-    max-width: 22ch;
+  .about__cv-note {
+    margin-top: var(--s-5);
+    color: var(--ink-soft);
   }
 
-  .cta .lede {
+  .about__actions {
     margin-top: var(--s-3);
   }
 
-  .cta__actions {
-    margin-top: var(--s-4);
+  .about__link {
+    font-size: var(--t-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 </style>
