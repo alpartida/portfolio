@@ -1,0 +1,142 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  // Drafts are visible with `npm run dev` so you can read them back, but are
+  // never built for production — so an unfinished case study can't be indexed
+  // or shared before you've decided to publish it.
+  const work = await getCollection(
+    'work',
+    ({ data }) => import.meta.env.DEV || !data.draft
+  );
+  return work.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<BaseLayout title={`${d.client} — ${d.title}`} description={d.summary} type="article">
+  <article>
+    <header class="case-head">
+      <div class="container">
+        <p class="eyebrow">{d.client}</p>
+        <h1>{d.title}</h1>
+        <p class="lede">{d.lede}</p>
+
+        <dl class="facts">
+          <div>
+            <dt>Role</dt>
+            <dd>{d.role}</dd>
+          </div>
+          <div>
+            <dt>Year</dt>
+            <dd>{d.year}</dd>
+          </div>
+          <div class="facts__stack">
+            <dt>Built with</dt>
+            <dd>
+              <ul class="tags">
+                {d.stack.map((s: string) => <li class="tag">{s}</li>)}
+              </ul>
+            </dd>
+          </div>
+        </dl>
+
+        {
+          d.liveUrl && (
+            <p class="case-head__live">
+              <a href={d.liveUrl} class="btn btn--ghost">
+                Visit the live site
+              </a>
+            </p>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="prose case-body">
+        <Content />
+      </div>
+    </div>
+
+    <footer class="section case-foot">
+      <div class="container">
+        <h2 class="case-foot__title">Want something like this?</h2>
+        <div class="cluster">
+          <a href="/contact" class="btn btn--primary">Start a project</a>
+          <a href="/work" class="btn btn--ghost">See other work</a>
+        </div>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-head {
+    padding-block: clamp(2.5rem, 8vw, 5rem) var(--s-4);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .case-head h1 {
+    margin-top: var(--s-2);
+    max-width: 28ch;
+  }
+
+  .case-head .lede {
+    margin-top: var(--s-3);
+  }
+
+  .facts {
+    margin-top: var(--s-4);
+    display: grid;
+    gap: var(--s-3);
+    grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+    align-items: start;
+  }
+
+  .facts__stack {
+    grid-column: 1 / -1;
+  }
+
+  .facts dt {
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.4em;
+  }
+
+  .facts dd {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+
+  .case-head__live {
+    margin-top: var(--s-4);
+  }
+
+  .case-body {
+    padding-block: clamp(2.5rem, 7vw, var(--s-5));
+  }
+
+  /* The MDX starts with an h2; it shouldn't push off the top rule. */
+  .case-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .case-foot {
+    border-top: 1px solid var(--rule);
+  }
+
+  .case-foot__title {
+    font-size: var(--step-2);
+    margin-bottom: var(--s-3);
+  }
+</style>

@@ -1,0 +1,213 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import portrait from '../images/alex-portrait.jpeg';
+import family from '../images/family.jpeg';
+import otis from '../images/otis.jpeg';
+import meredithAndFiru from '../images/meredith-and-firu.jpeg';
+---
+
+<BaseLayout
+  title="About"
+  description="Alex Partida is a web developer and designer in Los Angeles. Apparel production manager turned developer, three years on the web team of a daily newspaper, now building sites for small businesses and independent practitioners."
+>
+  <section class="page-head">
+    <div class="container about-head">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1>I came to this work from running production floors.</h1>
+        <p class="lede">
+          Which turns out to be useful training for building things small
+          businesses have to live with.
+        </p>
+      </div>
+      <Image
+        src={portrait}
+        alt="Alex Partida"
+        class="portrait"
+        widths={[320, 480, 640]}
+        sizes="(max-width: 760px) 60vw, 320px"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <p>
+          Before I wrote software I was an apparel production manager in Los
+          Angeles — schedules, vendors, margins, and the specific stress of a
+          deadline that cannot move. I changed careers through a coding
+          bootcamp and a web development certificate program at UC Davis
+          Extension, and I have been building for the web professionally since
+          2021.
+        </p>
+        <p>
+          I'm a web developer at <strong>The Salt Lake Tribune</strong>, a
+          nonprofit daily newspaper, where I've been since 2021. I migrated
+          their newsletter platform from Mailchimp to Iterable, build the
+          subscription, donation and sponsorship features that fund the
+          newsroom, and work on the bill tracker readers use to follow the Utah
+          legislature. Shipping to an audience that notices the moment something
+          breaks is a good education.
+        </p>
+        <p>
+          Alongside that I take on a small number of freelance projects for
+          small businesses and independent practitioners — a yoga teacher, a tax
+          practice, people whose website is a real part of how they make a
+          living rather than a brochure. Because I keep the list short, the work
+          gets proper attention.
+        </p>
+
+        <h2>How the production background shows up</h2>
+        <p>
+          Running production teaches you that the handoff is the whole job. A
+          beautiful sample means nothing if the factory can't reproduce it, and
+          a beautiful website means nothing if its owner can't change the
+          opening hours.
+        </p>
+        <p>
+          So that's what I optimise for. When I built Christine's yoga site, the
+          interesting decision wasn't the design — it was putting her class
+          schedule in a Google Sheet she owns, so she posts her own dates from
+          her phone without calling me. Every project ends with documentation
+          written for the person who has to use it.
+        </p>
+        <p>
+          I also care a lot about sites being fast and accessible, which is less
+          a moral position than a practical one: a slow site on a phone on a bad
+          connection is a site nobody reads.
+        </p>
+
+        <h2>Away from the keyboard</h2>
+        <p>
+          I live in Los Angeles with my partner Zach and my daughter Surie. We
+          are outnumbered by animals — Otis the miniature poodle, Meredith Grey
+          the Nebelung, and Firulais, who turned up on the patio one day, got
+          fed once by my daughter, and never left. All three were adopted, two
+          of them by accident.
+        </p>
+        <p>
+          Weekends are horses, the piano in the living room, and all four of us
+          reading completely different books in the same room. Learning to code
+          changed my life in the obvious ways, and also in the one I didn't
+          expect: I met Zach on the way through it. My daughter watches her mom
+          work in a field without many women in it, which I think about more
+          than I expected to.
+        </p>
+      </div>
+
+      <div class="gallery">
+        <figure>
+          <Image
+            src={family}
+            alt="Alex with her family in Los Angeles"
+            widths={[320, 560, 760]}
+            sizes="(max-width: 760px) 90vw, 360px"
+            loading="lazy"
+          />
+        </figure>
+        <figure>
+          <Image
+            src={otis}
+            alt="Otis, a miniature poodle"
+            widths={[320, 560]}
+            sizes="(max-width: 760px) 44vw, 240px"
+            loading="lazy"
+          />
+        </figure>
+        <figure>
+          <Image
+            src={meredithAndFiru}
+            alt="Meredith Grey and Firulais, two rescued cats"
+            widths={[320, 560]}
+            sizes="(max-width: 760px) 44vw, 240px"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="container">
+      <h2 class="cta__title">Working on something?</h2>
+      <p class="lede">
+        I'd like to hear about it — and I'll tell you straight if I'm not the
+        right fit.
+      </p>
+      <div class="cluster cta__actions">
+        <a href="/contact" class="btn btn--primary">Get in touch</a>
+        <a href="/AlexPartidaResume.pdf" class="btn btn--ghost">Résumé (PDF)</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 8vw, 5.5rem) 0;
+  }
+
+  .about-head {
+    display: flex;
+    gap: var(--s-4);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .about-head > div {
+    flex: 1 1 22rem;
+  }
+
+  .about-head h1 {
+    margin-top: var(--s-2);
+    max-width: 22ch;
+  }
+
+  .about-head .lede {
+    margin-top: var(--s-3);
+  }
+
+  .portrait {
+    width: min(320px, 60vw);
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--rule);
+    flex: none;
+  }
+
+  .gallery {
+    margin-top: var(--s-5);
+    display: grid;
+    gap: var(--s-3);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+
+  .gallery figure {
+    margin: 0;
+  }
+
+  .gallery img {
+    border-radius: var(--radius);
+    border: 1px solid var(--rule);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .cta__title {
+    max-width: 22ch;
+  }
+
+  .cta .lede {
+    margin-top: var(--s-3);
+  }
+
+  .cta__actions {
+    margin-top: var(--s-4);
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+title: Newsletters, subscriptions and a bill tracker at a daily newspaper
+client: The Salt Lake Tribune
+summary: Staff developer on the web team of a nonprofit newsroom — migrating the newsletter platform, building the features that fund the journalism, and shipping a Utah legislature bill tracker.
+lede: The Tribune is a nonprofit newsroom that depends on reader subscriptions and donations. I'm on the team that builds and maintains sltrib.com.
+role: Web Developer (staff)
+year: "2021–present"
+stack:
+  - React
+  - Arc XP Fusion
+  - AWS Lambda
+  - Node.js
+  - CircleCI
+order: 2
+---
+
+## Context
+
+sltrib.com runs on Arc XP Fusion — the publishing platform the Washington Post
+built and now licenses to other newsrooms. Work happens in React components
+that slot into editor-configurable page layouts, backed by Node services and
+Lambda functions. I've contributed around 850 commits to it since 2021.
+
+The Tribune converted to nonprofit status, which shapes the engineering
+priorities: the features that keep the lights on are newsletters,
+subscriptions and donations, and they get the same care as the editorial tools.
+
+## Migrating the newsletter platform
+
+The biggest piece of work was moving the Tribune's newsletter system from
+Mailchimp to Iterable. That is less a swap than a rebuild:
+
+- New signup components across the site, including the inline units that appear
+  inside articles
+- A reader-facing preferences page where subscribers choose which newsletters
+  they get
+- The Lambda functions behind it — subscribe, unsubscribe, and update
+  preferences — talking to Iterable's API
+- Retiring every Mailchimp-connected component once traffic had moved over
+
+Newsletter signup is a conversion surface, so the work had to be correct on the
+first try in production: a broken unsubscribe link is both a bad reader
+experience and a compliance problem.
+
+## Revenue features
+
+A nonprofit newsroom asks readers for money constantly, and how you ask matters.
+I built and maintain:
+
+- Banner offers targeted to article pages
+- The donation ask, including copy and layout changes the audience team could run
+- Gift subscriptions, surfaced in the footer and the subscribe flow
+- Article sponsorship components, including sponsored coverage of the Utah Jazz
+
+## The bill tracker
+
+Utah's legislative session is a major story every year. I worked on the bill
+tracker that lets readers follow legislation — a sortable table fed by a
+bills API, including the null-safety work that keeps a table rendering when
+upstream data is incomplete, which with government APIs is often.
+
+## Platform work
+
+Alongside features: upgrading the application to React 18, an Airtable
+migration, environment and secret configuration across sandbox and production,
+and caching work. The unglamorous half of a long-lived codebase, and the half
+that decides whether the next three years of feature work is pleasant.
+
+## What it teaches
+
+Shipping continuously to an audience that notices immediately when something
+breaks. It's also where I learned to work inside someone else's platform — you
+don't get to rewrite Arc XP, so you learn its grain and build with it. That
+habit carries straight into client work, where the constraint is usually a
+budget or a non-technical owner rather than a CMS.

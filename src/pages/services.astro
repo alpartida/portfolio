@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const offerings = [
+  {
+    title: 'A new site, start to finish',
+    body: 'For a practice or small business that needs a real web presence. I write and structure the content with you, design it, build it, and set up hosting. You end up owning every part of it.',
+    good: 'Good fit if you have no site, or one you’re embarrassed to send people to.',
+  },
+  {
+    title: 'Rescuing a site you can’t update',
+    body: 'If changing your own hours, prices or schedule means emailing a developer and waiting, that is a fixable problem. I rebuild the site so the things that change often are the things you control — usually in a tool you already use.',
+    good: 'Good fit if your site is accurate the week it launches and wrong three months later.',
+  },
+  {
+    title: 'Faster, findable, accessible',
+    body: 'Performance, accessibility and the technical side of search on a site you otherwise like. This is the work that decides whether people reach your site at all, and whether they can use it when they do.',
+    good: 'Good fit if you suspect your site is slow, invisible in search, or hard to use on a phone.',
+  },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'A conversation',
+    body: 'Free, half an hour. You tell me what you’re trying to do and what’s in the way. If I’m not the right person, I’ll say so and point you somewhere better.',
+  },
+  {
+    n: '02',
+    title: 'A written proposal',
+    body: 'What I’ll build, what it costs, and when it’s done — in writing, as a fixed price rather than an open-ended hourly bill. You approve it before anything starts.',
+  },
+  {
+    n: '03',
+    title: 'Design, then build',
+    body: 'You see the design before it gets built, and the build in progress on a real URL rather than in a slide deck. Feedback is expected at both stages.',
+  },
+  {
+    n: '04',
+    title: 'Handover',
+    body: 'The site goes live on hosting you own, with a written guide to updating the parts that change. Written for you, not for a developer.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="How I work with small businesses and independent practitioners: fixed-price projects, design and build, and a handover that leaves you able to update your own site."
+>
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h1>How a project runs.</h1>
+      <p class="lede">
+        Fixed price, agreed in writing before anything starts. No hourly
+        surprises, and no site you need me to maintain forever.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What I take on</h2>
+      <div class="offerings">
+        {
+          offerings.map((o) => (
+            <div class="offering">
+              <h3>{o.title}</h3>
+              <p>{o.body}</p>
+              <p class="offering__fit">{o.good}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>The process</h2>
+      <ol class="steps">
+        {
+          steps.map((s) => (
+            <li class="step">
+              <span class="step__n">{s.n}</span>
+              <div>
+                <h3 class="step__title">{s.title}</h3>
+                <p class="step__body">{s.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What it costs</h2>
+      <div class="prose costs">
+        <p>
+          Every project is quoted as a <strong>fixed price</strong>, agreed in
+          writing before any work starts. A three-page site for a yoga teacher
+          and a site with booking and payments are not the same job, so I don't
+          pretend a single rate card covers both.
+        </p>
+        <p>
+          The enquiry form asks for a rough budget. That isn't a negotiating
+          tactic — it's so I can tell you quickly whether what you want and what
+          you want to spend are in the same place, instead of us both finding
+          out at the end of a call. "I genuinely don't know yet" is one of the
+          options, and it's a perfectly good answer.
+        </p>
+        <p>What's true on every project:</p>
+        <ul>
+          <li>The price is fixed and in writing before work begins.</li>
+          <li>You own the finished site, the code and the hosting account.</li>
+          <li>
+            Documentation for updating it yourself is included, not an upsell.
+          </li>
+          <li>
+            If the scope changes mid-project, we agree the new price before I
+            build it.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What I don't do</h2>
+      <div class="prose">
+        <p>
+          Worth saying plainly, so neither of us wastes a call: I don't take on
+          ongoing social media or content marketing, I don't do logo and brand
+          identity work from scratch, and I don't build on page-builder
+          platforms like Wix or Squarespace — if that's what you need, you'll be
+          better served by someone who specialises in them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="container">
+      <h2 class="cta__title">Start with a conversation.</h2>
+      <p class="lede">
+        Half an hour, free, no pitch. Worst case you leave knowing what you
+        actually need.
+      </p>
+      <a href="/contact" class="btn btn--primary">Get in touch</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 8vw, 5.5rem) 0;
+  }
+
+  .page-head h1 {
+    margin-top: var(--s-2);
+  }
+
+  .page-head .lede {
+    margin-top: var(--s-3);
+  }
+
+  .offerings {
+    margin-top: var(--s-4);
+    display: grid;
+    gap: var(--s-4);
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+
+  .offering h3 {
+    font-size: var(--step-1);
+  }
+
+  .offering p {
+    margin-top: var(--s-2);
+    color: var(--ink-soft);
+  }
+
+  .offering__fit {
+    font-size: var(--step--1);
+    color: var(--clay) !important;
+  }
+
+  .steps {
+    margin-top: var(--s-4);
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .step {
+    display: flex;
+    gap: var(--s-3);
+    align-items: start;
+    max-width: 62ch;
+  }
+
+  .step__n {
+    font-family: var(--display);
+    font-size: var(--step-2);
+    color: var(--accent);
+    line-height: 1;
+    flex: none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .step__title {
+    font-size: var(--step-1);
+  }
+
+  .step__body {
+    margin-top: var(--s-1);
+    color: var(--ink-soft);
+  }
+
+  .costs {
+    margin-top: var(--s-3);
+  }
+
+  .cta__title {
+    max-width: 22ch;
+  }
+
+  .cta .lede {
+    margin-top: var(--s-3);
+  }
+
+  .cta .btn {
+    margin-top: var(--s-4);
+  }
+</style>

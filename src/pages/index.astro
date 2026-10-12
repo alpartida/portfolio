@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { SITE } from '../config';
+
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const services = [
+  {
+    title: 'A new site, start to finish',
+    body: 'Design and build for a practice or small business that needs a real web presence — written, structured and styled from scratch, not dropped into a theme.',
+  },
+  {
+    title: 'Rescuing a site you can’t update',
+    body: 'If changing your own hours means emailing a developer, that’s fixable. I rebuild sites so the things that change often are the things you control.',
+  },
+  {
+    title: 'Making an existing site faster and findable',
+    body: 'Performance, accessibility and the technical side of search — the work that decides whether people reach your site at all.',
+  },
+];
+---
+
+<BaseLayout title="Alex Partida" description={SITE.description}>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Freelance web developer &amp; designer &middot; Los Angeles</p>
+      <h1 class="hero__title">
+        Websites small businesses can actually run themselves.
+      </h1>
+      <p class="lede hero__lede">
+        I'm Alex. I build fast, accessible sites for independent practitioners
+        and small businesses — then hand them over with documentation written
+        for a human being, not a developer.
+      </p>
+      <div class="cluster hero__actions">
+        <a href="/contact" class="btn btn--primary">Start a project</a>
+        <a href="/work" class="btn btn--ghost">See the work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <a href="/work" class="section-head__link">All work</a>
+      </div>
+      <div class="work-list">
+        {
+          work.slice(0, 3).map((item) => (
+            <WorkCard
+              href={`/work/${item.id}/`}
+              client={item.data.client}
+              title={item.data.title}
+              summary={item.data.summary}
+              year={item.data.year}
+              stack={item.data.stack}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What I take on</h2>
+      <div class="services-grid">
+        {
+          services.map((s) => (
+            <div class="card">
+              <h3 class="service__title">{s.title}</h3>
+              <p class="service__body">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="services-note">
+        <a href="/services">How a project runs, and what it costs &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="container">
+      <h2 class="cta__title">Have something in mind?</h2>
+      <p class="lede">
+        Tell me what you're trying to build and what's in the way. I'll tell you
+        honestly whether I'm the right person for it.
+      </p>
+      <a href="/contact" class="btn btn--primary">Get in touch</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 11vw, 8rem);
+  }
+
+  .hero__title {
+    margin-top: var(--s-2);
+    max-width: 24ch;
+  }
+
+  .hero__lede {
+    margin-top: var(--s-3);
+  }
+
+  .hero__actions {
+    margin-top: var(--s-4);
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--s-3);
+  }
+
+  .section-head__link {
+    font-size: var(--step-0);
+  }
+
+  /* The first card draws its own top rule; the list closes with one. */
+  .work-list {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .services-grid {
+    margin-top: var(--s-4);
+    display: grid;
+    gap: var(--s-3);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+
+  .service__title {
+    font-size: var(--step-1);
+  }
+
+  .service__body {
+    margin-top: var(--s-2);
+    color: var(--ink-soft);
+    font-size: var(--step-0);
+  }
+
+  .services-note {
+    margin-top: var(--s-3);
+  }
+
+  .cta__title {
+    max-width: 20ch;
+  }
+
+  .cta .lede {
+    margin-top: var(--s-3);
+  }
+
+  .cta .btn {
+    margin-top: var(--s-4);
+  }
+</style>

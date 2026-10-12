@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page doesn't exist."
+  noindex={true}
+>
+  <section class="centered">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>That page isn't here.</h1>
+      <p class="lede">
+        It may have moved when I rebuilt this site. The work and the contact
+        form are both one click away.
+      </p>
+      <div class="cluster actions">
+        <a href="/work" class="btn btn--primary">See the work</a>
+        <a href="/" class="btn btn--ghost">Back home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .centered {
+    padding-block: clamp(4rem, 14vw, 9rem);
+  }
+  h1 {
+    margin-top: var(--s-2);
+    max-width: 20ch;
+  }
+  .lede {
+    margin-top: var(--s-3);
+  }
+  .actions {
+    margin-top: var(--s-4);
+  }
+</style>
