@@ -1,17 +1,12 @@
 ---
 /**
- * A deliberately quiet top bar. The original site had no nav at all —
- * the giant Bungee Shade words on the homepage *were* the navigation.
- * With five pages that no longer stretches, so this sits small and
- * letterspaced in the corner and lets the display type stay the loudest
- * thing on the page.
+ * One navigation affordance, not two.
+ *
+ * The original site had no nav bar — the giant words were the navigation.
+ * A small text nav running alongside them competed with the display type for
+ * the same job, so the links now live in the full-screen overlay and this bar
+ * holds only the wordmark, the theme switch, and the button that opens it.
  */
-import { NAV } from '../config';
-
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isCurrent = (href: string) =>
-  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
-
 const { showWordmark = true } = Astro.props;
 ---
 
@@ -22,23 +17,9 @@ const { showWordmark = true } = Astro.props;
         Alex Partida
       </a>
     ) : (
-      <span />
+      <span class="top__spacer" />
     )
   }
-
-  <nav aria-label="Main">
-    <ul class="top__nav">
-      {
-        NAV.map((l) => (
-          <li>
-            <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
-              {l.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
 
   <button
     type="button"
@@ -56,6 +37,20 @@ const { showWordmark = true } = Astro.props;
       <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"></path>
     </svg>
   </button>
+
+  <button
+    type="button"
+    class="top__menu"
+    data-menu-open
+    aria-expanded="false"
+    aria-controls="site-menu"
+  >
+    <span>Menu</span>
+    <span class="top__bars" aria-hidden="true">
+      <i></i>
+      <i></i>
+    </span>
+  </button>
 </header>
 
 <style>
@@ -64,7 +59,12 @@ const { showWordmark = true } = Astro.props;
     align-items: center;
     gap: var(--s-3);
     padding-block: clamp(1.4rem, 3.5vh, 2.4rem);
-    flex-wrap: wrap;
+    flex: none;
+  }
+
+  .top__mark,
+  .top__spacer {
+    margin-right: auto;
   }
 
   .top__mark {
@@ -72,44 +72,11 @@ const { showWordmark = true } = Astro.props;
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-right: auto;
     transition: opacity 0.2s ease;
   }
 
   .top__mark:hover {
     opacity: 0.6;
-  }
-
-  /* When the wordmark is suppressed (homepage), still push the nav right. */
-  .top > span {
-    margin-right: auto;
-  }
-
-  .top__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-1) var(--s-3);
-    list-style: none;
-  }
-
-  .top__nav a {
-    font-size: var(--t-sm);
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    padding-bottom: 0.35em;
-    border-bottom: var(--rule-w) solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .top__nav a:hover {
-    color: var(--ink);
-  }
-
-  .top__nav a[aria-current='page'] {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
   }
 
   .top__theme {
@@ -119,8 +86,9 @@ const { showWordmark = true } = Astro.props;
     cursor: pointer;
     display: grid;
     place-items: center;
-    width: 1.9rem;
-    height: 1.9rem;
+    /* 44px minimum target. */
+    width: 2.75rem;
+    height: 2.75rem;
     flex: none;
     transition: color 0.2s ease;
   }
@@ -130,12 +98,54 @@ const { showWordmark = true } = Astro.props;
   }
 
   .top__theme svg {
-    width: 1rem;
-    height: 1rem;
+    width: 1.05rem;
+    height: 1.05rem;
+    max-width: none;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.7;
     stroke-linecap: round;
+  }
+
+  .top__menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: var(--t-sm);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    /* 44px minimum target. */
+    min-height: 2.75rem;
+    padding: 0.5em 0;
+    flex: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .top__menu:hover {
+    opacity: 0.6;
+  }
+
+  .top__bars {
+    display: grid;
+    gap: 5px;
+    width: 26px;
+  }
+
+  .top__bars i {
+    display: block;
+    height: var(--rule-w);
+    background: var(--ink);
+    transition: transform 0.2s ease;
+  }
+
+  .top__menu:hover .top__bars i:first-child {
+    transform: translateX(3px);
   }
 
   /* Show the icon for the theme you'd switch TO. */
@@ -174,32 +184,15 @@ const { showWordmark = true } = Astro.props;
     }
   }
 
-  /* Keep the nav and the theme toggle on one row; let the nav itself
-     wrap if it must, rather than pushing the button onto its own line. */
-  @media (max-width: 620px) {
-    .top {
-      gap: var(--s-2);
-      row-gap: var(--s-1);
-      flex-wrap: nowrap;
-      align-items: center;
-    }
-
-    .top__mark {
-      display: none;
-    }
-
-    .top > span {
-      display: none;
-    }
-
-    .top__nav {
-      flex: 1 1 auto;
-      gap: var(--s-1) var(--s-2);
-      justify-content: flex-start;
-    }
-
-    .top__nav a {
-      letter-spacing: 1.4px;
+  /* On a phone the word is redundant next to the bars. */
+  @media (max-width: 420px) {
+    .top__menu span:first-child {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 </style>

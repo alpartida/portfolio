@@ -124,35 +124,12 @@ const { showHome = false } = Astro.props;
     fill: currentColor;
   }
 
-  /* Below the split breakpoint the rail would eat the screen, so
-     it lies down into a strip across the top instead. */
+  /* Below the split breakpoint the rail is dropped rather than laid on
+     its side: the social links and navigation both live in the overlay and
+     the footer there, so a strip across the top would only be clutter. */
   @media (max-width: 860px) {
     .rail {
-      width: 100%;
-      height: auto;
-      position: static;
-      flex-direction: row;
-      align-items: center;
-      gap: var(--s-2);
-      padding: var(--s-2) var(--gutter);
-    }
-
-    .rail .rule {
-      width: 100%;
-      height: var(--rule-w);
-      flex: 1 1 auto;
-    }
-
-    .rail__home {
-      writing-mode: horizontal-tb;
-      transform: none;
-      order: -1;
-    }
-
-    .rail__social {
-      flex-direction: row;
-      margin: 0;
-      gap: var(--s-3);
+      display: none;
     }
   }
 </style>

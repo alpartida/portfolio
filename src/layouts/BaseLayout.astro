@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import SideRail from '../components/SideRail.astro';
+import MenuOverlay from '../components/MenuOverlay.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../config';
 
@@ -90,6 +91,8 @@ const personSchema = {
 
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
+
+    <MenuOverlay />
 
     <div class="shell">
       <SideRail showHome={showHome} />
