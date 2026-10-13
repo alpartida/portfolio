@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { SITE } from '../config';
+import { HOME } from '../copy';
 
 const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
@@ -11,13 +12,6 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
 // Longest word decides the type size, so a word can never outrun its column.
 const longestWord = (s: string) =>
   Math.max(...s.split(/\s+/).map((w) => w.length));
-
-// The giant words are the navigation, the way the original site worked.
-const bigNav = [
-  { text: 'Work', href: '/work' },
-  { text: 'Services', href: '/services' },
-  { text: 'Contact', href: '/contact' },
-];
 ---
 
 <BaseLayout
@@ -28,21 +22,13 @@ const bigNav = [
 >
   <section class="split">
     <div class="split__text">
-      <h1 class="intro__name">Alex Partida</h1>
-      <p>Web Developer. Designer. Los Angeles.</p>
-      <p>
-        Creating beautiful and engaging digital experiences — and building
-        websites that small businesses can actually run themselves.
-      </p>
-      <p>
-        Currently a web developer at The Salt Lake Tribune, and taking on a
-        small number of freelance projects.
-      </p>
+      <h1 class="intro__name">{HOME.name}</h1>
+      {HOME.intro.map((line) => <p>{line}</p>)}
     </div>
 
     <nav class="split__display" aria-label="Sections">
       {
-        bigNav.map((l) => (
+        HOME.bigNav.map((l) => (
           <a
             href={l.href}
             class="big-link"
@@ -57,7 +43,7 @@ const bigNav = [
 
   <section class="home-work">
     <div class="rule--h" aria-hidden="true"></div>
-    <h2 class="eyebrow home-work__head">Selected work</h2>
+    <h2 class="eyebrow home-work__head">{HOME.selectedWorkHeading}</h2>
     <div>
       {
         work.slice(0, 3).map((item) => (
@@ -73,18 +59,15 @@ const bigNav = [
       }
     </div>
     <p class="home-work__more">
-      <a href="/work" class="link-u">All work</a>
+      <a href="/work" class="link-u">{HOME.allWorkLink}</a>
     </p>
   </section>
 
   <section class="home-cta">
     <div class="rule--h" aria-hidden="true"></div>
-    <p class="quote home-cta__quote">Have something in mind?</p>
-    <p class="home-cta__body">
-      Tell me what you're trying to build and what's in the way. I'll tell you
-      honestly whether I'm the right person for it.
-    </p>
-    <a href="/contact" class="btn">Start a project</a>
+    <p class="quote home-cta__quote">{HOME.ctaQuote}</p>
+    <p class="home-cta__body">{HOME.ctaBody}</p>
+    <a href="/contact" class="btn">{HOME.ctaButton}</a>
   </section>
 </BaseLayout>
 
@@ -98,12 +81,17 @@ const bigNav = [
     text-transform: uppercase;
   }
 
+  .split__text p {
+    margin-top: var(--s-2);
+  }
+
   .home-work {
     padding-block: clamp(2.5rem, 7vw, var(--s-5)) 0;
   }
 
   .home-work__head {
     margin-top: var(--s-3);
+    display: block;
   }
 
   .home-work__more {

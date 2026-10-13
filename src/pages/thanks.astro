@@ -1,18 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { THANKS } from '../copy';
 ---
 
 <BaseLayout title="Thanks" description="Your enquiry is in." noindex={true} showHome={true}>
   <div class="column">
-    <h1 class="page-title">Thanks</h1>
-    <p class="quote th__q">That's in.</p>
-    <p class="th__sub">
-      I'll read it properly and reply within two business days. If it's urgent,
-      reply to my first email and say so — it'll jump the queue.
-    </p>
+    <h1 class="page-title">{THANKS.title}</h1>
+    <p class="quote th__q">{THANKS.quote}</p>
+    <p class="th__sub">{THANKS.body}</p>
     <div class="cluster th__actions">
-      <a href="/work" class="btn btn--ghost">Read a case study</a>
-      <a href="/" class="link-u th__link">Back home</a>
+      <a href="/work" class="btn btn--ghost">{THANKS.readWork}</a>
+      <a href="/" class="link-u th__link">{THANKS.backHome}</a>
     </div>
   </div>
 </BaseLayout>

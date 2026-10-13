@@ -1,26 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config';
+import { CONTACT } from '../copy';
+
+const L = CONTACT.labels;
 ---
 
 <BaseLayout
-  title="Contact"
-  description="Tell me about your project. Fixed-price web design and development for small businesses and independent practitioners in Los Angeles and remote."
+  title={CONTACT.title}
+  description={CONTACT.metaDescription}
   showHome={true}
 >
   <div class="column">
-    <h1 class="page-title">Contact</h1>
-    <p class="quote ct__lede">Tell me what you're trying to build.</p>
-    <p class="ct__sub">
-      The more you can tell me about the problem, the more useful my first reply
-      will be. I answer everything within two business days.
-    </p>
+    <h1 class="page-title">{CONTACT.title}</h1>
+    <p class="quote ct__lede">{CONTACT.quote}</p>
+    <p class="ct__sub">{CONTACT.sub}</p>
 
     <div class="ct__layout">
       <!--
         Netlify Forms: the `data-netlify` attribute is what registers this form
         on deploy. Submissions appear under Forms in the Netlify dashboard;
-        turn on email notifications there to get them in your inbox.
+        a notification has to be added there for them to reach an inbox.
       -->
       <form
         class="form"
@@ -37,86 +37,74 @@ import { SITE } from '../config';
         </p>
 
         <div class="field">
-          <label for="name">Your name</label>
+          <label for="name">{L.name}</label>
           <input id="name" name="name" type="text" autocomplete="name" required />
         </div>
 
         <div class="field">
-          <label for="email">Email</label>
+          <label for="email">{L.email}</label>
           <input id="email" name="email" type="email" autocomplete="email" required />
         </div>
 
         <div class="field">
-          <label for="business">Business or practice <span class="opt">(optional)</span></label>
+          <label for="business">
+            {L.business} <span class="opt">{L.optional}</span>
+          </label>
           <input id="business" name="business" type="text" autocomplete="organization" />
         </div>
 
         <div class="field">
-          <label for="website">Current website <span class="opt">(optional)</span></label>
+          <label for="website">
+            {L.website} <span class="opt">{L.optional}</span>
+          </label>
           <input id="website" name="website" type="url" inputmode="url" placeholder="https://" />
         </div>
 
         <div class="field">
-          <label for="need">What do you need?</label>
+          <label for="need">{L.need}</label>
           <select id="need" name="need" required>
             <option value="">Choose one…</option>
-            <option>A new site, start to finish</option>
-            <option>Rebuilding a site I can't update myself</option>
-            <option>Making an existing site faster or findable</option>
-            <option>Something else</option>
+            {CONTACT.needOptions.map((o) => <option>{o}</option>)}
           </select>
         </div>
 
         <div class="field">
-          <label for="budget">Rough budget</label>
+          <label for="budget">{L.budget}</label>
           <select id="budget" name="budget" required>
             <option value="">Choose one…</option>
-            <option>Under $2,000</option>
-            <option>$2,000 – $5,000</option>
-            <option>$5,000 – $10,000</option>
-            <option>More than $10,000</option>
-            <option>I genuinely don't know yet</option>
+            {CONTACT.budgetOptions.map((o) => <option>{o}</option>)}
           </select>
-          <p class="hint">
-            An honest range saves us both a call. "I don't know yet" is a fine
-            answer.
-          </p>
+          <p class="hint">{CONTACT.budgetHint}</p>
         </div>
 
         <div class="field">
-          <label for="timeline">When do you need it?</label>
+          <label for="timeline">{L.timeline}</label>
           <select id="timeline" name="timeline" required>
             <option value="">Choose one…</option>
-            <option>As soon as possible</option>
-            <option>Within a month or two</option>
-            <option>Within six months</option>
-            <option>No fixed deadline</option>
+            {CONTACT.timelineOptions.map((o) => <option>{o}</option>)}
           </select>
         </div>
 
         <div class="field">
-          <label for="message">What's the problem you're trying to solve?</label>
+          <label for="message">{L.message}</label>
           <textarea id="message" name="message" rows="6" required></textarea>
         </div>
 
-        <button type="submit" class="btn">Send enquiry</button>
+        <button type="submit" class="btn">{L.submit}</button>
       </form>
 
       <aside class="aside">
-        <h2 class="eyebrow">What happens next</h2>
+        <h2 class="eyebrow">{CONTACT.nextHeading}</h2>
         <ol class="aside__list">
-          <li>I reply within two business days.</li>
-          <li>If it looks like a fit, we talk for half an hour. Free.</li>
-          <li>You get a fixed-price proposal in writing before anything starts.</li>
+          {CONTACT.nextSteps.map((s) => <li>{s}</li>)}
         </ol>
 
-        <h2 class="eyebrow aside__head">Where I work</h2>
+        <h2 class="eyebrow aside__head">{CONTACT.whereHeading}</h2>
         <p class="aside__note">
-          Based in {SITE.location}, working with clients here and remotely. Most
-          projects run entirely over email and a couple of calls.
+          Based in {SITE.location}, {CONTACT.whereBody}
         </p>
 
-        <h2 class="eyebrow aside__head">Elsewhere</h2>
+        <h2 class="eyebrow aside__head">{CONTACT.elsewhereHeading}</h2>
         <ul class="aside__plain">
           <li><a href={SITE.linkedin} class="link-u">LinkedIn</a></li>
           <li><a href={SITE.github} class="link-u">GitHub</a></li>
@@ -198,7 +186,7 @@ import { SITE } from '../config';
   }
 
   select {
-    /* Keep the native arrow visible against a transparent field. */
+    /* Keep an arrow visible against a transparent field. */
     appearance: none;
     background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
       linear-gradient(135deg, currentColor 50%, transparent 50%);

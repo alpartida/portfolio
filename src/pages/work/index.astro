@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { WORK } from '../../copy';
 
 const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
@@ -14,26 +15,14 @@ const longestWord = (s: string) =>
 
 <BaseLayout
   title="Work"
-  description="Case studies: a Los Angeles tax practice, and newsletter, subscription and revenue work at The Salt Lake Tribune."
+  description={WORK.metaDescription}
   showHome={true}
   fill={true}
 >
   <section class="split">
     <div class="split__text">
-      <h1 class="page-title">Work</h1>
-      <p>
-        This is a showcase of my work across web design, web apps and product —
-        for freelance clients and in a newsroom.
-      </p>
-      <p>
-        The world of digital design and web development is constantly evolving
-        and so has my role over the last few years. I'm still learning and
-        gaining new skills every day.
-      </p>
-      <p>
-        The interesting part of each of these is rarely the technology. It's the
-        constraint that shaped it.
-      </p>
+      <h1 class="page-title">{WORK.title}</h1>
+      {WORK.intro.map((line) => <p class="work-intro__p">{line}</p>)}
     </div>
 
     <nav class="split__display" aria-label="Case studies">
@@ -56,6 +45,10 @@ const longestWord = (s: string) =>
 </BaseLayout>
 
 <style>
+  .work-intro__p + .work-intro__p {
+    margin-top: var(--s-2);
+  }
+
   .wl {
     display: block;
     margin-bottom: var(--s-3);

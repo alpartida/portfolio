@@ -7,15 +7,16 @@
  * the same job, so the links now live in the full-screen overlay and this bar
  * holds only the wordmark, the theme switch, and the button that opens it.
  */
+import { MENU } from '../copy';
+import { SITE } from '../config';
+
 const { showWordmark = true } = Astro.props;
 ---
 
 <header class="top">
   {
     showWordmark ? (
-      <a href="/" class="top__mark">
-        Alex Partida
-      </a>
+      <a href="/" class="top__mark">{SITE.name}</a>
     ) : (
       <span class="top__spacer" />
     )
@@ -45,7 +46,7 @@ const { showWordmark = true } = Astro.props;
     aria-expanded="false"
     aria-controls="site-menu"
   >
-    <span>Menu</span>
+    <span>{MENU.open}</span>
     <span class="top__bars" aria-hidden="true">
       <i></i>
       <i></i>

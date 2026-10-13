@@ -13,15 +13,28 @@ npm run preview  # serve the built site locally
 
 Requires Node 20+. Netlify is pinned to Node 22 in `netlify.toml`.
 
+## Changing the words
+
+**`src/copy.ts` holds every piece of text on the site.** Headings, paragraphs,
+button labels, form labels and dropdown options are all there as plain strings
+with comments explaining each one. Edit it, save, reload — nothing in that file
+is code you can break by rewording it.
+
+The one exception is the case studies, which live as their own Markdown files
+in `src/content/work/` because they're long-form prose.
+
+A couple of fields accept basic HTML (`<strong>bold</strong>`, `<a href="...">a
+link</a>`) — those are marked with a comment where they appear.
+
 ## Where things live
 
 | What you want to change | Where |
 |---|---|
-| Email, availability line, social links | `src/config.ts` |
+| **Any text on the site** | **`src/copy.ts`** |
+| Availability line, social links, location | `src/config.ts` |
 | Colours, type scale, spacing | `src/styles/global.css` — the `:root` block at the top |
 | A case study | `src/content/work/*.mdx` |
-| Services, process, pricing | `src/pages/services.astro` |
-| Bio and personal section | `src/pages/about.astro` |
+| Page structure and layout | `src/pages/*.astro` |
 | The share card image | `npm run og` after editing `scripts/make-og-image.mjs` |
 
 Everything references design tokens rather than raw hex values, so changing a

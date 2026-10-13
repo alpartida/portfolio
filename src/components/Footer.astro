@@ -5,6 +5,7 @@
  * never opens, this is still a complete way around the site.
  */
 import { NAV, SITE } from '../config';
+import { FOOTER } from '../copy';
 
 const year = new Date().getFullYear();
 ---
@@ -33,8 +34,7 @@ const year = new Date().getFullYear();
   </div>
 
   <p class="foot__base">
-    &copy; {year} Alex Partida &middot; {SITE.location} &middot; Designed and
-    built by me
+    &copy; {year} {SITE.name} &middot; {SITE.location} &middot; {FOOTER.credit}
   </p>
 </footer>
 

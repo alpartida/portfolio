@@ -1,69 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const offerings = [
-  {
-    title: 'A new site, start to finish',
-    body: 'For a practice or small business that needs a real web presence. I write and structure the content with you, design it, build it, and set up hosting. You end up owning every part of it.',
-    good: 'Good fit if you have no site, or one you’re embarrassed to send people to.',
-  },
-  {
-    title: 'Rescuing a site you can’t update',
-    body: 'If changing your own hours, prices or schedule means emailing a developer and waiting, that is a fixable problem. I rebuild the site so the things that change often are the things you control — usually in a tool you already use.',
-    good: 'Good fit if your site is accurate the week it launches and wrong three months later.',
-  },
-  {
-    title: 'Faster, findable, accessible',
-    body: 'Performance, accessibility and the technical side of search on a site you otherwise like. This is the work that decides whether people reach your site at all, and whether they can use it when they do.',
-    good: 'Good fit if you suspect your site is slow, invisible in search, or hard to use on a phone.',
-  },
-];
-
-const steps = [
-  {
-    n: '01',
-    title: 'A conversation',
-    body: 'Free, half an hour. You tell me what you’re trying to do and what’s in the way. If I’m not the right person, I’ll say so and point you somewhere better.',
-  },
-  {
-    n: '02',
-    title: 'A written proposal',
-    body: 'What I’ll build, what it costs, and when it’s done — in writing, as a fixed price rather than an open-ended hourly bill. You approve it before anything starts.',
-  },
-  {
-    n: '03',
-    title: 'Design, then build',
-    body: 'You see the design before it gets built, and the build in progress on a real URL rather than in a slide deck. Feedback is expected at both stages.',
-  },
-  {
-    n: '04',
-    title: 'Handover',
-    body: 'The site goes live on hosting you own, with a written guide to updating the parts that change. Written for you, not for a developer.',
-  },
-];
+import { SERVICES } from '../copy';
 ---
 
 <BaseLayout
-  title="Services"
-  description="How I work with small businesses and independent practitioners: fixed-price projects, design and build, and a handover that leaves you able to update your own site."
+  title={SERVICES.title}
+  description={SERVICES.metaDescription}
   showHome={true}
 >
   <div class="column">
-    <h1 class="page-title">Services</h1>
-    <p class="quote svc__lede">Fixed price, agreed before anything starts.</p>
-    <p class="svc__sub">
-      No hourly surprises, and no site you need me to maintain forever.
-    </p>
+    <h1 class="page-title">{SERVICES.title}</h1>
+    <p class="quote svc__lede">{SERVICES.quote}</p>
+    <p class="svc__sub">{SERVICES.sub}</p>
 
     <section class="svc__section">
-      <h2 class="eyebrow">What I take on</h2>
+      <h2 class="eyebrow">{SERVICES.offeringsHeading}</h2>
       <div class="offerings">
         {
-          offerings.map((o) => (
+          SERVICES.offerings.map((o) => (
             <div class="offering">
               <h3 class="offering__title">{o.title}</h3>
               <p class="offering__body">{o.body}</p>
-              <p class="offering__fit">{o.good}</p>
+              <p class="offering__fit">{o.fit}</p>
             </div>
           ))
         }
@@ -72,10 +30,10 @@ const steps = [
 
     <section class="svc__section">
       <div class="rule--h" aria-hidden="true"></div>
-      <h2 class="eyebrow svc__head">The process</h2>
+      <h2 class="eyebrow svc__head">{SERVICES.processHeading}</h2>
       <ol class="steps">
         {
-          steps.map((s) => (
+          SERVICES.steps.map((s) => (
             <li class="step">
               <span class="step__n">{s.n}</span>
               <div>
@@ -90,58 +48,29 @@ const steps = [
 
     <section class="svc__section">
       <div class="rule--h" aria-hidden="true"></div>
-      <h2 class="eyebrow svc__head">What it costs</h2>
+      <h2 class="eyebrow svc__head">{SERVICES.costHeading}</h2>
       <div class="prose">
-        <p>
-          Every project is quoted as a <strong>fixed price</strong>, agreed in
-          writing before any work starts. A three-page site for a yoga teacher
-          and a site with booking and payments are not the same job, so I don't
-          pretend a single rate card covers both.
-        </p>
-        <p>
-          The enquiry form asks for a rough budget. That isn't a negotiating
-          tactic — it's so I can tell you quickly whether what you want and what
-          you want to spend are in the same place, instead of us both finding
-          out at the end of a call. "I genuinely don't know yet" is one of the
-          options, and it's a perfectly good answer.
-        </p>
-        <p>What's true on every project:</p>
+        {SERVICES.costBody.map((para) => <p set:html={para} />)}
+        <p>{SERVICES.costListIntro}</p>
         <ul>
-          <li>The price is fixed and in writing before work begins.</li>
-          <li>You own the finished site, the code and the hosting account.</li>
-          <li>
-            Documentation for updating it yourself is included, not an upsell.
-          </li>
-          <li>
-            If the scope changes mid-project, we agree the new price before I
-            build it.
-          </li>
+          {SERVICES.costList.map((item) => <li>{item}</li>)}
         </ul>
       </div>
     </section>
 
     <section class="svc__section">
       <div class="rule--h" aria-hidden="true"></div>
-      <h2 class="eyebrow svc__head">What I don't do</h2>
+      <h2 class="eyebrow svc__head">{SERVICES.dontHeading}</h2>
       <div class="prose">
-        <p>
-          Worth saying plainly, so neither of us wastes a call: I don't take on
-          ongoing social media or content marketing, I don't do logo and brand
-          identity work from scratch, and I don't build on page-builder
-          platforms like Wix or Squarespace — if that's what you need, you'll be
-          better served by someone who specialises in them.
-        </p>
+        <p>{SERVICES.dontBody}</p>
       </div>
     </section>
 
     <section class="svc__section">
       <div class="rule--h" aria-hidden="true"></div>
-      <p class="quote svc__cta-q">Start with a conversation.</p>
-      <p class="svc__sub">
-        Half an hour, free, no pitch. Worst case you leave knowing what you
-        actually need.
-      </p>
-      <a href="/contact" class="btn svc__btn">Get in touch</a>
+      <p class="quote svc__cta-q">{SERVICES.ctaQuote}</p>
+      <p class="svc__sub">{SERVICES.ctaBody}</p>
+      <a href="/contact" class="btn svc__btn">{SERVICES.ctaButton}</a>
     </section>
   </div>
 </BaseLayout>

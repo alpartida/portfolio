@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { NOT_FOUND } from '../copy';
 ---
 
 <BaseLayout
@@ -9,15 +10,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   showHome={true}
 >
   <div class="column">
-    <h1 class="page-title">404</h1>
-    <p class="quote nf__q">That page isn't here.</p>
-    <p class="nf__sub">
-      It may have moved when I rebuilt this site. The work and the contact form
-      are both one click away.
-    </p>
+    <h1 class="page-title">{NOT_FOUND.title}</h1>
+    <p class="quote nf__q">{NOT_FOUND.quote}</p>
+    <p class="nf__sub">{NOT_FOUND.body}</p>
     <div class="cluster nf__actions">
-      <a href="/work" class="btn">See the work</a>
-      <a href="/" class="link-u nf__link">Back home</a>
+      <a href="/work" class="btn">{NOT_FOUND.seeWork}</a>
+      <a href="/" class="link-u nf__link">{NOT_FOUND.backHome}</a>
     </div>
   </div>
 </BaseLayout>
