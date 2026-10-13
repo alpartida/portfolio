@@ -12,8 +12,8 @@ export const SITE = {
   url: 'https://alexpartida.com',
 
   // Deliberately no public email address — enquiries come through the form at
-  // /contact, which keeps the inbox clean and arrives pre-triaged with budget
-  // and timeline. If you ever want one public, add it here and it will appear
+  // /contact, which keeps the inbox clean and arrives pre-triaged with a
+  // timeline. If you ever want one public, add it here and it will appear
   // in the footer, on the contact page and in the structured data.
   email: null as string | null,
 

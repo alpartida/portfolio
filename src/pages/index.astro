@@ -9,9 +9,14 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
 
-// Longest word decides the type size, so a word can never outrun its column.
 const longestWord = (s: string) =>
   Math.max(...s.split(/\s+/).map((w) => w.length));
+
+// One size for every word in the nav, decided by the longest of them. Sizing
+// each word to its own length (as the menu overlay deliberately does) left
+// these three at three unrelated sizes, because the short ones hit the --d-xl
+// cap and the long ones didn't.
+const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
 ---
 
 <BaseLayout
@@ -26,14 +31,10 @@ const longestWord = (s: string) =>
       {HOME.intro.map((line) => <p>{line}</p>)}
     </div>
 
-    <nav class="split__display" aria-label="Sections">
+    <nav class="split__display" aria-label="Sections" style={`--chars:${navChars}`}>
       {
         HOME.bigNav.map((l) => (
-          <a
-            href={l.href}
-            class="big-link"
-            style={`--chars:${longestWord(l.text)}`}
-          >
+          <a href={l.href} class="big-link">
             {l.text}
           </a>
         ))

@@ -61,7 +61,7 @@ export const WORK = {
 
   // Shown in the browser tab and in Google results.
   metaDescription:
-    'Case studies: a Los Angeles tax practice, and newsletter, subscription and revenue work at The Salt Lake Tribune.',
+    'Case studies: freelance web design and development for small businesses, an RJI fellowship toolkit for local news publishers, and landing page, newsletter and revenue work at The Salt Lake Tribune.',
 
   // The bottom of each individual case study.
   caseFootQuote: 'Want something like this?',
@@ -142,14 +142,14 @@ export const SERVICES = {
   // Each item is a paragraph. <strong>bold</strong> works here.
   costBody: [
     `Every project is quoted as a <strong>fixed price</strong>, agreed in
-     writing before any work starts. A three-page site for a yoga teacher and
-     a site with booking and payments are not the same job, so I don't pretend
-     a single rate card covers both.`,
-    `The enquiry form asks for a rough budget. That isn't a negotiating tactic
-     — it's so I can tell you quickly whether what you want and what you want
-     to spend are in the same place, instead of us both finding out at the end
-     of a call. "I genuinely don't know yet" is one of the options, and it's a
-     perfectly good answer.`,
+     writing before any work starts. A straightforward three-page site and a
+     site with booking and payments are not the same job, so I don't pretend a
+     single rate card covers both.`,
+    `If you have a number in mind, bring it to the first call. That isn't a
+     negotiating tactic — it's so I can tell you quickly whether what you want
+     and what you want to spend are in the same place, instead of us both
+     finding out at the end of the process. "I genuinely don't know yet" is a
+     perfectly good answer too, and a common one.`,
   ],
   costListIntro: `What's true on every project:`,
   costList: [
@@ -161,13 +161,12 @@ export const SERVICES = {
 
   dontHeading: `What I don't do`,
   dontBody: `Worth saying plainly, so neither of us wastes a call: I don't take
-    on ongoing social media or content marketing, I don't do logo and brand
-    identity work from scratch, and I don't build on page-builder platforms
+    on ongoing social media or content marketing and I don't build on page-builder platforms
     like Wix or Squarespace — if that's what you need, you'll be better served
     by someone who specialises in them.`,
 
   ctaQuote: 'Start with a conversation.',
-  ctaBody: `Half an hour, free, no pitch. Worst case you leave knowing what you
+  ctaBody: `Half an hour, free. Worst case you leave knowing what you
     actually need.`,
   ctaButton: 'Get in touch',
 };
@@ -177,7 +176,7 @@ export const ABOUT = {
   quote: 'From Apparel to Tech',
 
   metaDescription:
-    'Alex Partida is a web developer and designer in Los Angeles. Apparel production manager turned developer, on the web team of a daily newspaper, building sites for small businesses and independent practitioners.',
+    'Alex Partida is a web developer and designer in Los Angeles. Apparel production manager turned developer, on the web team of a daily newspaper, building sites for small businesses.',
 
   // Each item is a paragraph. Basic HTML works: <strong>bold</strong> and
   // <a href="/work">a link</a>.
@@ -186,19 +185,25 @@ export const ABOUT = {
      web developer. Before I wrote software I ran production in Los Angeles:
      schedules, vendors, margins, and the specific stress of a deadline that
      cannot move. I changed careers through a six-month coding bootcamp and a
-     web development certificate at UC Davis Extension, and I've been building
+     web development certificate from SheCodes, and I've been building
      for the web professionally since 2021.`,
     `I'm a web developer at <strong>The Salt Lake Tribune</strong>, a nonprofit
-     daily newspaper. I migrated their newsletter platform from Mailchimp to
-     Iterable, build the subscription, donation and sponsorship features that
-     fund the newsroom, and work on the bill tracker readers use to follow the
-     Utah legislature. The Tribune being a nonprofit makes the work feel like
-     it matters, and shipping to an audience that notices the moment something
+     daily newspaper. The work is whatever the site needs: landing pages across
+     sltrib.com, the subscription, donation and sponsorship features that fund
+     the newsroom, and a migration of the whole newsletter platform from
+     Mailchimp to Iterable. The Tribune being a nonprofit makes the work feel like it
+     matters, and shipping to an audience that notices the moment something
      breaks is a good education.`,
+    // Deliberately tenseless — no "I'm speaking" or "this month", so it reads
+    // correctly before and after the event and never needs a date edit.
+    `Beyond the day job: a <strong>Reynolds Journalism Institute</strong>
+     fellowship, where I built the Article-as-Homepage toolkit for independent
+     local publishers, and a speaking slot at the News Product Alliance Summit
+     in Chicago.`,
     `Alongside that I take on a small number of freelance projects for small
-     businesses and independent practitioners — a yoga teacher, a tax practice,
-     people whose website is a real part of how they make a living rather than
-     a brochure. Because I keep the list short, the work gets proper attention.`,
+     businesses and independent practitioners — people whose website is a real
+     part of how they make a living rather than a brochure. Because I keep the
+     list short, the work gets proper attention.`,
   ],
 
   craftHeading: 'How the production background shows up',
@@ -208,10 +213,10 @@ export const ABOUT = {
      beautiful website means nothing if its owner can't change the opening
      hours.`,
     `So that's what I optimise for. The most interesting decision on a recent
-     project wasn't the design — it was putting the client's class schedule in
-     a Google Sheet she owns, so she posts her own dates from her phone without
-     calling me. Every project ends with documentation written for the person
-     who has to use it.`,
+     project wasn't the design — it was moving the part of the site that
+     changes every week into a Google Sheet the client owns, so she updates it
+     from her phone without calling me. Every project ends with documentation
+     written for the person who has to use it.`,
     `I'm skilled in HTML, CSS, JavaScript, React, WordPress and Adobe Photoshop,
      and I care a lot about sites being fast and accessible — less a moral
      position than a practical one. A slow site on a phone on a bad connection
@@ -221,15 +226,16 @@ export const ABOUT = {
 
   personalHeading: 'Away from the keyboard',
   personal: [
-    `I live in Los Angeles with my partner Zach and my daughter Surie. We are
-     outnumbered by animals — Otis the miniature poodle, Meredith Grey the
-     Nebelung, and Firulais, who turned up on the patio one day, got fed once
-     by my daughter, and never left. All three were adopted, two of them by
-     accident.`,
-    `Weekends are horses, the piano in the living room, and all four of us
-     reading completely different books in the same room. Learning to code
+    `I live in Los Angeles with my partner Zach and our daughters, Surie and
+     one-year-old Sasha. We are outnumbered by animals — Otis the miniature
+     poodle, Meredith Grey the Nebelung, and Firulais, who turned up on the
+     patio one day, got fed once by Surie, and never left. All three were
+     adopted, two of them by accident.`,
+    `Weekends are horses, the piano in the living room, and everyone old enough
+     to read doing it in the same room out of completely different books —
+     while Sasha does her best to get hold of one. Learning to code
      changed my life in the obvious ways, and also in one I didn't expect: I
-     met Zach on the way through it. My daughter watches her mom work in a
+     met Zach on the way through it. My daughters watch their mom work in a
      field without many women in it, which I think about more than I expected
      to.`,
   ],
@@ -263,29 +269,17 @@ export const CONTACT = {
     business: 'Business or practice',
     website: 'Current website',
     need: 'What do you need?',
-    budget: 'Rough budget',
     timeline: 'When do you need it?',
     message: `What's the problem you're trying to solve?`,
     optional: '(optional)',
     submit: 'Send enquiry',
   },
 
-  budgetHint: `An honest range saves us both a call. "I don't know yet" is a
-    fine answer.`,
-
   needOptions: [
     'A new site, start to finish',
     `Rebuilding a site I can't update myself`,
     'Making an existing site faster or findable',
     'Something else',
-  ],
-
-  budgetOptions: [
-    'Under $2,000',
-    '$2,000 – $5,000',
-    '$5,000 – $10,000',
-    'More than $10,000',
-    `I genuinely don't know yet`,
   ],
 
   timelineOptions: [

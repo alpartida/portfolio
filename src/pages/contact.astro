@@ -69,15 +69,6 @@ const L = CONTACT.labels;
         </div>
 
         <div class="field">
-          <label for="budget">{L.budget}</label>
-          <select id="budget" name="budget" required>
-            <option value="">Choose one…</option>
-            {CONTACT.budgetOptions.map((o) => <option>{o}</option>)}
-          </select>
-          <p class="hint">{CONTACT.budgetHint}</p>
-        </div>
-
-        <div class="field">
           <label for="timeline">{L.timeline}</label>
           <select id="timeline" name="timeline" required>
             <option value="">Choose one…</option>
@@ -210,12 +201,6 @@ const L = CONTACT.labels;
     line-height: 1.8;
     border: var(--rule-w) solid var(--ink-soft);
     padding: 0.7em 0.8em;
-  }
-
-  .hint {
-    font-size: var(--t-sm);
-    line-height: 1.7;
-    color: var(--ink-soft);
   }
 
   .form .btn {

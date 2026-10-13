@@ -78,8 +78,12 @@ import meredithAndFiru from '../images/meredith-and-firu.jpeg';
 </BaseLayout>
 
 <style>
+  /* The portrait is positioned against this box, so it has to stop where the
+     text column does. Left full width, `right` pins it to the far edge of a
+     wide monitor, stranding it a long way from the prose. */
   .about {
     position: relative;
+    max-width: var(--measure);
   }
 
   .about__col {

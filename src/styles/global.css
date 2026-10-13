@@ -309,16 +309,20 @@ a:visited {
    words (WORK, BLOG, ABOUT) at 12vw, which just fit. Longer
    words like SERVICES blow straight off the right edge.
 
-   So each word is sized to its *container* rather than to the
-   viewport: 100cqw divided by the longest word's length, with
-   0.9em of width budgeted per character. --chars is set inline
-   per link. The clamp still acts as the upper bound, so short
-   words stay as big as they ever were.
+   So words are sized to their *container* rather than to the
+   viewport: 100cqw divided by a word length, with 0.9em of
+   width budgeted per character. The clamp still acts as the
+   upper bound, so short words stay as big as they ever were.
+
+   --chars is set inline, and where it is set decides the effect.
+   On a parent (the homepage nav) every word inside comes out at
+   one size, set by the longest. Per link (the menu overlay, the
+   work index) each word is sized to its own length, so a stack
+   of them justifies to equal widths.
    --------------------------------------------------------- */
 .big-link {
   font-family: var(--display);
-  --chars: 5;
-  font-size: min(var(--d-xl), calc(100cqw / (var(--chars) * 0.9)));
+  font-size: min(var(--d-xl), calc(100cqw / (var(--chars, 5) * 0.9)));
   line-height: 1em;
   color: var(--ink);
   display: block;
@@ -339,7 +343,7 @@ a:visited {
 }
 
 .big-link--md {
-  font-size: min(var(--d-lg), calc(100cqw / (var(--chars) * 0.9)));
+  font-size: min(var(--d-lg), calc(100cqw / (var(--chars, 5) * 0.9)));
   margin-bottom: 0.22em;
 }
 
