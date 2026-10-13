@@ -17,11 +17,10 @@ import { SERVICES } from '../copy';
       <h2 class="eyebrow">{SERVICES.offeringsHeading}</h2>
       <div class="offerings">
         {
-          SERVICES.offerings.map((o) => (
-            <div class="offering">
+          SERVICES.offerings.map((o, i) => (
+            <div class="offering" data-reveal style={`--i:${i}`}>
               <h3 class="offering__title">{o.title}</h3>
               <p class="offering__body">{o.body}</p>
-              <p class="offering__fit">{o.fit}</p>
             </div>
           ))
         }
@@ -29,12 +28,12 @@ import { SERVICES } from '../copy';
     </section>
 
     <section class="svc__section">
-      <div class="rule--h" aria-hidden="true"></div>
+      <div class="rule--h" aria-hidden="true" data-reveal></div>
       <h2 class="eyebrow svc__head">{SERVICES.processHeading}</h2>
       <ol class="steps">
         {
-          SERVICES.steps.map((s) => (
-            <li class="step">
+          SERVICES.steps.map((s, i) => (
+            <li class="step" data-reveal style={`--i:${i}`}>
               <span class="step__n">{s.n}</span>
               <div>
                 <h3 class="step__title">{s.title}</h3>
@@ -47,7 +46,7 @@ import { SERVICES } from '../copy';
     </section>
 
     <section class="svc__section">
-      <div class="rule--h" aria-hidden="true"></div>
+      <div class="rule--h" aria-hidden="true" data-reveal></div>
       <h2 class="eyebrow svc__head">{SERVICES.costHeading}</h2>
       <div class="prose">
         {SERVICES.costBody.map((para) => <p set:html={para} />)}
@@ -59,7 +58,7 @@ import { SERVICES } from '../copy';
     </section>
 
     <section class="svc__section">
-      <div class="rule--h" aria-hidden="true"></div>
+      <div class="rule--h" aria-hidden="true" data-reveal></div>
       <h2 class="eyebrow svc__head">{SERVICES.dontHeading}</h2>
       <div class="prose">
         <p>{SERVICES.dontBody}</p>
@@ -67,7 +66,7 @@ import { SERVICES } from '../copy';
     </section>
 
     <section class="svc__section">
-      <div class="rule--h" aria-hidden="true"></div>
+      <div class="rule--h" aria-hidden="true" data-reveal></div>
       <p class="quote svc__cta-q">{SERVICES.ctaQuote}</p>
       <p class="svc__sub">{SERVICES.ctaBody}</p>
       <a href="/contact" class="btn svc__btn">{SERVICES.ctaButton}</a>
@@ -111,13 +110,6 @@ import { SERVICES } from '../copy';
   .offering__body {
     margin-top: var(--s-1);
     max-width: 58ch;
-  }
-
-  .offering__fit {
-    margin-top: var(--s-1);
-    font-size: var(--t-sm);
-    line-height: 1.8;
-    color: var(--ink-soft);
   }
 
   .steps {

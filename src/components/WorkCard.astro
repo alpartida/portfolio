@@ -6,12 +6,27 @@ export interface Props {
   summary: string;
   year: string;
   stack: string[];
+  /* Position in the list, so a run of cards reveals in sequence. */
+  index?: number;
+  /* Client, year and title only — used on the homepage, where the giant
+     nav word is already the route into the work and the cards only need
+     to say what exists. */
+  compact?: boolean;
 }
 
-const { href, client, title, summary, year, stack } = Astro.props;
+const {
+  href,
+  client,
+  title,
+  summary,
+  year,
+  stack,
+  index = 0,
+  compact = false,
+} = Astro.props;
 ---
 
-<article class="wc">
+<article class:list={['wc', { 'is-compact': compact }]} data-reveal style={`--i:${index}`}>
   <p class="meta wc__meta">
     <span>{client}</span>
     <span aria-hidden="true">·</span>
@@ -22,17 +37,28 @@ const { href, client, title, summary, year, stack } = Astro.props;
     <a href={href}>{title}</a>
   </h3>
 
-  <p class="wc__summary">{summary}</p>
+  {!compact && <p class="wc__summary">{summary}</p>}
 
-  <ul class="tags">
-    {stack.slice(0, 4).map((s) => <li class="tag">{s}</li>)}
-  </ul>
+  {
+    !compact && (
+      <ul class="tags">
+        {stack.slice(0, 4).map((s) => (
+          <li class="tag">{s}</li>
+        ))}
+      </ul>
+    )
+  }
 </article>
 
 <style>
   .wc {
     padding-block: var(--s-4);
     border-bottom: var(--rule-w) solid var(--rule-soft);
+  }
+
+  /* Less to read means less room needed. */
+  .wc.is-compact {
+    padding-block: var(--s-3);
   }
 
   .wc__meta {
@@ -53,14 +79,20 @@ const { href, client, title, summary, year, stack } = Astro.props;
     max-width: 34ch;
   }
 
+  /* The underline arrives from the left on hover — the hairline motif
+     again, rather than the dimming that every other link used to do. */
   .wc__title a {
-    display: inline-block;
-    transition: opacity 0.2s ease, transform 0.25s ease;
+    display: inline;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    transition: background-size 0.4s var(--ease-out);
   }
 
-  .wc__title a:hover {
-    opacity: 0.62;
-    transform: translateX(0.05em);
+  .wc__title a:hover,
+  .wc__title a:focus-visible {
+    background-size: 100% 1px;
   }
 
   .wc__summary {

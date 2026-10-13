@@ -41,8 +41,8 @@ const isCurrent = (href: string) =>
   <nav class="menu__nav" aria-label="Menu">
     <ul>
       {
-        items.map((l) => (
-          <li>
+        items.map((l, i) => (
+          <li style={`--i:${i}`}>
             <a
               href={l.href}
               class="big-link menu__link"
@@ -88,6 +88,24 @@ const isCurrent = (href: string) =>
 
   .menu[hidden] {
     display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .menu__nav li {
+      animation: menu-word-in 0.5s var(--ease-out) both;
+      animation-delay: calc(var(--i) * 55ms + 80ms);
+    }
+
+    @keyframes menu-word-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.3em);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {

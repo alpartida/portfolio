@@ -27,28 +27,32 @@ const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
 >
   <section class="split">
     <div class="split__text">
-      <h1 class="intro__name">{HOME.name}</h1>
-      {HOME.intro.map((line) => <p>{line}</p>)}
+      <h1 class="intro__name" style="--j:0">{HOME.name}</h1>
+      {HOME.intro.map((line, i) => <p style={`--j:${i + 1}`}>{line}</p>)}
     </div>
 
     <nav class="split__display" aria-label="Sections" style={`--chars:${navChars}`}>
       {
-        HOME.bigNav.map((l) => (
-          <a href={l.href} class="big-link">
-            {l.text}
-          </a>
+        HOME.bigNav.map((l, i) => (
+          <span class="big-word" style={`--i:${i}`}>
+            <a href={l.href} class="big-link">
+              {l.text}
+            </a>
+          </span>
         ))
       }
     </nav>
   </section>
 
   <section class="home-work">
-    <div class="rule--h" aria-hidden="true"></div>
+    <div class="rule--h" aria-hidden="true" data-reveal></div>
     <h2 class="eyebrow home-work__head">{HOME.selectedWorkHeading}</h2>
     <div>
       {
-        work.slice(0, 3).map((item) => (
+        work.slice(0, 3).map((item, i) => (
           <WorkCard
+            compact
+            index={i}
             href={`/work/${item.id}/`}
             client={item.data.client}
             title={item.data.title}
@@ -65,7 +69,7 @@ const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
   </section>
 
   <section class="home-cta">
-    <div class="rule--h" aria-hidden="true"></div>
+    <div class="rule--h" aria-hidden="true" data-reveal></div>
     <p class="quote home-cta__quote">{HOME.ctaQuote}</p>
     <p class="home-cta__body">{HOME.ctaBody}</p>
     <a href="/contact" class="btn">{HOME.ctaButton}</a>
@@ -73,6 +77,38 @@ const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
 </BaseLayout>
 
 <style>
+  /* The words arrive one after another rather than all at once. The
+     animation is on this wrapper, not on the link: a `both` fill mode
+     holds the final transform and would otherwise outrank the skew on
+     hover, killing it. */
+  .big-word {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .big-word {
+      animation: word-in 0.8s var(--ease-out) both;
+      animation-delay: calc(var(--i) * 120ms + 120ms);
+    }
+
+    @keyframes word-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.22em);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* The intro lines follow the same cadence on the other side. */
+    .split__text > * {
+      animation: word-in 0.7s var(--ease-out) both;
+      animation-delay: calc(var(--j, 0) * 90ms);
+    }
+  }
+
   /* The name sits at body size, as it did originally — the display
      type on the right is what carries the page. */
   .intro__name {

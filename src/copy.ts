@@ -84,26 +84,23 @@ export const SERVICES = {
       title: 'A new site, start to finish',
       body: `For a practice or small business that needs a real web presence.
         I write and structure the content with you, design it, build it, and
-        set up hosting. You end up owning every part of it.`,
-      fit: `Good fit if you have no site, or one you're embarrassed to send
-        people to.`,
+        set up hosting — you end up owning every part of it. Good fit if you
+        have no site, or one you're embarrassed to send people to.`,
     },
     {
       title: `Rescuing a site you can't update`,
-      body: `If changing your own hours, prices or schedule means emailing a
-        developer and waiting, that is a fixable problem. I rebuild the site so
-        the things that change often are the things you control — usually in a
-        tool you already use.`,
-      fit: `Good fit if your site is accurate the week it launches and wrong
+      body: `If changing your own hours or prices means emailing a developer
+        and waiting, that's fixable. I rebuild the site so the things that
+        change often are the things you control, usually in a tool you already
+        use. Good fit if your site is accurate the week it launches and wrong
         three months later.`,
     },
     {
       title: 'Faster, findable, accessible',
       body: `Performance, accessibility and the technical side of search on a
-        site you otherwise like. This is the work that decides whether people
-        reach your site at all, and whether they can use it when they do.`,
-      fit: `Good fit if you suspect your site is slow, invisible in search, or
-        hard to use on a phone.`,
+        site you otherwise like. This is what decides whether people reach you
+        at all, and whether they can use the site when they do. Good fit if you
+        suspect yours is slow, invisible in search, or hard to use on a phone.`,
     },
   ],
 
@@ -112,29 +109,26 @@ export const SERVICES = {
     {
       n: '01',
       title: 'A conversation',
-      body: `Free, half an hour. You tell me what you're trying to do and
-        what's in the way. If I'm not the right person, I'll say so and point
-        you somewhere better.`,
+      body: `Free, half an hour. If I'm not the right person, I'll say so and
+        point you somewhere better.`,
     },
     {
       n: '02',
       title: 'A written proposal',
-      body: `What I'll build, what it costs, and when it's done — in writing,
-        as a fixed price rather than an open-ended hourly bill. You approve it
-        before anything starts.`,
+      body: `What I'll build, what it costs, and when it's done — as a fixed
+        price, approved before anything starts.`,
     },
     {
       n: '03',
       title: 'Design, then build',
-      body: `You see the design before it gets built, and the build in progress
-        on a real URL rather than in a slide deck. Feedback is expected at both
-        stages.`,
+      body: `You see the design before it's built, and the build in progress on
+        a real URL rather than in a slide deck.`,
     },
     {
       n: '04',
       title: 'Handover',
       body: `The site goes live on hosting you own, with a written guide to
-        updating the parts that change. Written for you, not for a developer.`,
+        updating the parts that change — written for you, not for a developer.`,
     },
   ],
 
@@ -143,13 +137,9 @@ export const SERVICES = {
   costBody: [
     `Every project is quoted as a <strong>fixed price</strong>, agreed in
      writing before any work starts. A straightforward three-page site and a
-     site with booking and payments are not the same job, so I don't pretend a
-     single rate card covers both.`,
-    `If you have a number in mind, bring it to the first call. That isn't a
-     negotiating tactic — it's so I can tell you quickly whether what you want
-     and what you want to spend are in the same place, instead of us both
-     finding out at the end of the process. "I genuinely don't know yet" is a
-     perfectly good answer too, and a common one.`,
+     site with booking and payments aren't the same job, so I don't pretend one
+     rate card covers both. If you have a number in mind, bring it to the first
+     call — "I genuinely don't know yet" is a perfectly good answer too.`,
   ],
   costListIntro: `What's true on every project:`,
   costList: [
@@ -166,7 +156,7 @@ export const SERVICES = {
     by someone who specialises in them.`,
 
   ctaQuote: 'Start with a conversation.',
-  ctaBody: `Half an hour, free. Worst case you leave knowing what you
+  ctaBody: `Let's talk, free. Worst case you leave knowing what you
     actually need.`,
   ctaButton: 'Get in touch',
 };
@@ -181,19 +171,16 @@ export const ABOUT = {
   // Each item is a paragraph. Basic HTML works: <strong>bold</strong> and
   // <a href="/work">a link</a>.
   intro: [
-    `Hi 👋 — welcome to my portfolio. I'm an apparel production manager turned
-     web developer. Before I wrote software I ran production in Los Angeles:
-     schedules, vendors, margins, and the specific stress of a deadline that
-     cannot move. I changed careers through a six-month coding bootcamp and a
-     web development certificate from SheCodes, and I've been building
-     for the web professionally since 2021.`,
+    `Hi 👋 — I'm an apparel production manager turned web developer. Before I
+     wrote software I ran production in Los Angeles: schedules, vendors,
+     margins, and the specific stress of a deadline that cannot move. I changed
+     careers through a coding bootcamp and a web development certificate from
+     SheCodes.`,
     `I'm a web developer at <strong>The Salt Lake Tribune</strong>, a nonprofit
      daily newspaper. The work is whatever the site needs: landing pages across
      sltrib.com, the subscription, donation and sponsorship features that fund
      the newsroom, and a migration of the whole newsletter platform from
-     Mailchimp to Iterable. The Tribune being a nonprofit makes the work feel like it
-     matters, and shipping to an audience that notices the moment something
-     breaks is a good education.`,
+     Mailchimp to Iterable.`,
     // Deliberately tenseless — no "I'm speaking" or "this month", so it reads
     // correctly before and after the event and never needs a date edit.
     `Beyond the day job: a <strong>Reynolds Journalism Institute</strong>
@@ -216,12 +203,9 @@ export const ABOUT = {
      project wasn't the design — it was moving the part of the site that
      changes every week into a Google Sheet the client owns, so she updates it
      from her phone without calling me. Every project ends with documentation
-     written for the person who has to use it.`,
-    `I'm skilled in HTML, CSS, JavaScript, React, WordPress and Adobe Photoshop,
-     and I care a lot about sites being fast and accessible — less a moral
-     position than a practical one. A slow site on a phone on a bad connection
-     is a site nobody reads. Have a look at my <a href="/work">work</a> or find
-     me on <a href="https://github.com/alpartida">GitHub</a>.`,
+     written for the person who has to use it. Have a look at my
+     <a href="/work">work</a>, or find me on
+     <a href="https://github.com/alpartida">GitHub</a>.`,
   ],
 
   personalHeading: 'Away from the keyboard',
@@ -292,7 +276,7 @@ export const CONTACT = {
   nextHeading: 'What happens next',
   nextSteps: [
     'I reply within two business days.',
-    'If it looks like a fit, we talk for half an hour. Free.',
+    'If it looks like a fit, we talk for free.',
     'You get a fixed-price proposal in writing before anything starts.',
   ],
 

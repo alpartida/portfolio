@@ -173,7 +173,8 @@ const L = CONTACT.labels;
     border-radius: 0;
     padding: 0.6em 0.1em;
     width: 100%;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.24s var(--ease-out),
+      box-shadow 0.24s var(--ease-out);
   }
 
   select {
@@ -189,11 +190,20 @@ const L = CONTACT.labels;
 
   input:hover,
   select:hover,
-  textarea:hover,
-  input:focus,
-  select:focus,
-  textarea:focus {
+  textarea:hover {
     border-bottom-color: var(--ink);
+  }
+
+  /* The underline thickens to two hairlines on focus — visible at a glance
+     without a coloured ring that the palette has no room for. */
+  input:focus,
+  select:focus {
+    border-bottom-color: var(--ink);
+    box-shadow: 0 var(--rule-w) 0 0 var(--ink);
+  }
+
+  textarea:focus {
+    border-color: var(--ink);
   }
 
   textarea {

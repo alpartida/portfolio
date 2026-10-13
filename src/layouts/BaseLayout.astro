@@ -107,6 +107,33 @@ const personSchema = {
         <Footer />
       </div>
     </div>
+
+    <!--
+      Reveal-on-scroll. Everything marked [data-reveal] is visible by
+      default in CSS and only hidden inside a prefers-reduced-motion:
+      no-preference query, so a failed script or a reduced-motion
+      preference leaves the page fully readable rather than blank.
+    -->
+    <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const targets = document.querySelectorAll('[data-reveal]');
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.1 }
+        );
+        targets.forEach((el) => io.observe(el));
+      }
+    </script>
   </body>
 </html>
 
