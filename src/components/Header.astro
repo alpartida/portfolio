@@ -199,8 +199,6 @@ const { showWordmark = true } = Astro.props;
 </style>
 
 <script>
-  const toggle = document.querySelector('[data-theme-toggle]');
-
   const current = () => {
     const set = document.documentElement.dataset.theme;
     if (set) return set;
@@ -209,13 +207,26 @@ const { showWordmark = true } = Astro.props;
       : 'light';
   };
 
-  toggle?.addEventListener('click', () => {
-    const next = current() === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem('theme', next);
-    } catch {
-      /* private browsing — the choice just won't persist */
-    }
-  });
+  // Re-bound after every client-side navigation. The router replaces the
+  // header, so the node this was bound to on first load is detached by the
+  // time you click it again. The dataset flag stops a second listener being
+  // added to a button that survived a swap.
+  function initTheme() {
+    const toggle = document.querySelector<HTMLElement>('[data-theme-toggle]');
+    if (!toggle || toggle.dataset.themeBound) return;
+    toggle.dataset.themeBound = 'true';
+
+    toggle.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {
+        /* private browsing — the choice just won't persist */
+      }
+    });
+  }
+
+  initTheme();
+  document.addEventListener('astro:page-load', initTheme);
 </script>

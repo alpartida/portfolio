@@ -76,12 +76,26 @@ const personSchema = {
 
     <script is:inline>
       // Apply the stored theme before first paint so there's no flash.
-      try {
-        var t = localStorage.getItem('theme');
-        if (t === 'light' || t === 'dark') {
-          document.documentElement.dataset.theme = t;
-        }
-      } catch (e) {}
+      //
+      // This has to run again after every client-side navigation: the router
+      // swaps the document and replaces the <html> element's attributes with
+      // the incoming page's, which carries no data-theme, so a stored choice
+      // would silently revert to the system setting on the first link click.
+      // astro:after-swap fires after the swap but before paint, so there's
+      // still no flash.
+      function applyStoredTheme() {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.dataset.theme = t;
+          } else {
+            delete document.documentElement.dataset.theme;
+          }
+        } catch (e) {}
+      }
+
+      applyStoredTheme();
+      document.addEventListener('astro:after-swap', applyStoredTheme);
     </script>
 
     <script
