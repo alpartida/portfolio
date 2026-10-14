@@ -180,12 +180,18 @@ export const ABOUT = {
      sltrib.com, the subscription, donation and sponsorship features that fund
      the newsroom, and a migration of the whole newsletter platform from
      Mailchimp to Iterable.`,
-    // Deliberately tenseless — no "I'm speaking" or "this month", so it reads
-    // correctly before and after the event and never needs a date edit.
+    // The speaking line is deliberately tenseless — no "I'm speaking" or
+    // "this month" — so it reads correctly before and after the event and
+    // never needs a date edit.
     `Beyond the day job: a <strong>Reynolds Journalism Institute</strong>
      fellowship, where I built the Article-as-Homepage toolkit for independent
-     local publishers, and a speaking slot at the News Product Alliance Summit
-     in Chicago.`,
+     local publishers and wrote a series for RJI on rethinking the article
+     page.`,
+    `I work with the <strong>News Product Alliance</strong> too, which is where
+     my Google News Initiative work has run — the News Product Management
+     Certification, and Next Gen News Sprint, a project with other newsrooms
+     on reaching 18–28 year olds. Plus a speaking slot at the NPA Summit in
+     Chicago.`,
     `Alongside that I take on a small number of freelance projects for small
      businesses and independent practitioners — people whose website is a real
      part of how they make a living rather than a brochure. Because I keep the
