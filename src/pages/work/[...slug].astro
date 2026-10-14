@@ -36,6 +36,7 @@ const longestWord = (s: string) =>
       <p
         class="display case__client"
         style={`--chars:${longestWord(d.client)}`}
+        transition:name={`client-${entry.id}`}
       >
         {d.client}
       </p>

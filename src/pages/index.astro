@@ -1,13 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WorkCard from '../components/WorkCard.astro';
 import { SITE } from '../config';
 import { HOME } from '../copy';
-
-const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order
-);
 
 const longestWord = (s: string) =>
   Math.max(...s.split(/\s+/).map((w) => w.length));
@@ -17,6 +11,16 @@ const longestWord = (s: string) =>
 // these three at three unrelated sizes, because the short ones hit the --d-xl
 // cap and the long ones didn't.
 const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
+
+
+/*
+ * The homepage is the intro and the three giant words, and that is the whole
+ * design. There was a "Selected work" block and a pill-button CTA beneath it
+ * for a while — the hero / selected-work / call-to-action shape every
+ * template has — and it read as a second, more ordinary website bolted under
+ * this one. The work lives at /work, where the client names get the same
+ * display treatment these nav words do.
+ */
 ---
 
 <BaseLayout
@@ -29,50 +33,29 @@ const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
     <div class="split__text">
       <h1 class="intro__name" style="--j:0">{HOME.name}</h1>
       {HOME.intro.map((line, i) => <p style={`--j:${i + 1}`}>{line}</p>)}
+
+      <div class="intro__rule" aria-hidden="true" style={`--j:${HOME.intro.length + 1}`}></div>
+
+      <p class="quote intro__cta" style={`--j:${HOME.intro.length + 2}`}>
+        {HOME.ctaQuote} <a href="/contact" class="link-u">{HOME.ctaLink}</a>
+      </p>
     </div>
 
     <nav class="split__display" aria-label="Sections" style={`--chars:${navChars}`}>
       {
         HOME.bigNav.map((l, i) => (
           <span class="big-word" style={`--i:${i}`}>
-            <a href={l.href} class="big-link">
+            <a
+              href={l.href}
+              class="big-link"
+              transition:name={`nav-${l.text.toLowerCase()}`}
+            >
               {l.text}
             </a>
           </span>
         ))
       }
     </nav>
-  </section>
-
-  <section class="home-work">
-    <div class="rule--h" aria-hidden="true" data-reveal></div>
-    <h2 class="eyebrow home-work__head">{HOME.selectedWorkHeading}</h2>
-    <div>
-      {
-        work.slice(0, 3).map((item, i) => (
-          <WorkCard
-            compact
-            index={i}
-            href={`/work/${item.id}/`}
-            client={item.data.client}
-            title={item.data.title}
-            summary={item.data.summary}
-            year={item.data.year}
-            stack={item.data.stack}
-          />
-        ))
-      }
-    </div>
-    <p class="home-work__more">
-      <a href="/work" class="link-u">{HOME.allWorkLink}</a>
-    </p>
-  </section>
-
-  <section class="home-cta">
-    <div class="rule--h" aria-hidden="true" data-reveal></div>
-    <p class="quote home-cta__quote">{HOME.ctaQuote}</p>
-    <p class="home-cta__body">{HOME.ctaBody}</p>
-    <a href="/contact" class="btn">{HOME.ctaButton}</a>
   </section>
 </BaseLayout>
 
@@ -118,42 +101,34 @@ const navChars = Math.max(...HOME.bigNav.map((l) => longestWord(l.text)));
     text-transform: uppercase;
   }
 
-  .split__text p {
+  .split__text > p {
     margin-top: var(--s-2);
   }
 
-  .home-work {
-    padding-block: clamp(2.5rem, 7vw, var(--s-5)) 0;
-  }
-
-  .home-work__head {
-    margin-top: var(--s-3);
-    display: block;
-  }
-
-  .home-work__more {
-    margin-top: var(--s-3);
-    font-size: var(--t-sm);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .home-cta {
-    padding-top: clamp(2.5rem, 7vw, var(--s-5));
-  }
-
-  .home-cta__quote {
+  /* A short hairline rather than a full-width rule — it separates the
+     invitation from the intro without turning the column into sections. */
+  .intro__rule {
     margin-top: var(--s-4);
-    max-width: 18ch;
+    width: 3.5rem;
+    height: var(--rule-w);
+    background: var(--ink);
   }
 
-  .home-cta__body {
-    margin-top: var(--s-2);
-    max-width: 52ch;
-    color: var(--ink-soft);
+  /* One sentence, one typeface, one size: the question and the invitation
+     read as a single thought, and the serif keeps it clear of the display
+     type opposite rather than competing with it at a smaller size. */
+  .split__text > .intro__cta {
+    margin-top: var(--s-3);
+    max-width: 26ch;
+    text-wrap: balance;
   }
 
-  .home-cta .btn {
-    margin-top: var(--s-4);
+  .intro__cta .link-u {
+    text-underline-offset: 0.18em;
+  }
+
+  .intro__cta .link-u:hover,
+  .intro__cta .link-u:focus-visible {
+    text-underline-offset: 0.3em;
   }
 </style>

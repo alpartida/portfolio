@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import SideRail from '../components/SideRail.astro';
@@ -87,6 +88,7 @@ const personSchema = {
       type="application/ld+json"
       set:html={JSON.stringify(personSchema)}
     />
+    <ClientRouter />
   </head>
 
   <body>
@@ -115,12 +117,15 @@ const personSchema = {
       preference leaves the page fully readable rather than blank.
     -->
     <script>
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const targets = document.querySelectorAll('[data-reveal]');
+      function initReveal() {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const targets = document.querySelectorAll('[data-reveal]:not(.is-in)');
 
-      if (reduced || !('IntersectionObserver' in window)) {
-        targets.forEach((el) => el.classList.add('is-in'));
-      } else {
+        if (reduced || !('IntersectionObserver' in window)) {
+          targets.forEach((el) => el.classList.add('is-in'));
+          return;
+        }
+
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -133,6 +138,42 @@ const personSchema = {
         );
         targets.forEach((el) => io.observe(el));
       }
+
+      initReveal();
+      document.addEventListener('astro:page-load', initReveal);
+
+      /*
+       * The display words lean toward the pointer. The original site skewed
+       * them a flat -10deg on hover; this varies the angle by where the
+       * cursor sits across the word, which gives the lean some weight
+       * instead of making it a binary state. Pure enhancement: the CSS
+       * default is the original -10deg, so nothing here is load-bearing.
+       */
+      function initSkew() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!window.matchMedia('(hover: hover)').matches) return;
+
+        document.querySelectorAll('.big-link').forEach((el) => {
+          if (el.dataset.skewBound) return;
+          el.dataset.skewBound = 'true';
+
+          el.addEventListener('pointermove', (e) => {
+            const box = el.getBoundingClientRect();
+            if (!box.width) return;
+            // -1 at the left edge, +1 at the right.
+            const across = ((e.clientX - box.left) / box.width) * 2 - 1;
+            // Leans further the further right the pointer is: -5deg to -15deg.
+            el.style.setProperty('--skew', `${(-10 - across * 5).toFixed(2)}deg`);
+          });
+
+          el.addEventListener('pointerleave', () => {
+            el.style.removeProperty('--skew');
+          });
+        });
+      }
+
+      initSkew();
+      document.addEventListener('astro:page-load', initSkew);
     </script>
   </body>
 </html>

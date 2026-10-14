@@ -221,6 +221,10 @@ const isCurrent = (href: string) =>
 </style>
 
 <script>
+  // Re-bound after every client-side navigation: the router swaps the
+  // document, so a one-shot module script would leave a dead menu button on
+  // the second page you visit.
+  function initMenu() {
   const menu = document.getElementById('site-menu');
   const openBtn = document.querySelector<HTMLButtonElement>('[data-menu-open]');
   const closeBtn = menu?.querySelector<HTMLButtonElement>('[data-menu-close]');
@@ -277,4 +281,13 @@ const isCurrent = (href: string) =>
     openBtn.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
   }
+  }
+
+  initMenu();
+  document.addEventListener('astro:page-load', initMenu);
+
+  // Navigating with the overlay open would otherwise leave the body locked.
+  document.addEventListener('astro:before-swap', () => {
+    document.body.style.overflow = '';
+  });
 </script>

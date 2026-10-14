@@ -21,7 +21,7 @@ const longestWord = (s: string) =>
 >
   <section class="split">
     <div class="split__text">
-      <h1 class="page-title">{WORK.title}</h1>
+      <h1 class="page-title" transition:name="nav-work">{WORK.title}</h1>
       {WORK.intro.map((line) => <p class="work-intro__p">{line}</p>)}
     </div>
 
@@ -33,6 +33,7 @@ const longestWord = (s: string) =>
               href={`/work/${item.id}/`}
               class="big-link big-link--md"
               style={`--chars:${longestWord(item.data.client)}`}
+              transition:name={`client-${item.id}`}
             >
               {item.data.client}
             </a>

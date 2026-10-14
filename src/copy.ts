@@ -35,16 +35,15 @@ export const HOME = {
   bigNav: [
     { text: 'Work', href: '/work' },
     { text: 'Services', href: '/services' },
+    { text: 'About', href: '/about' },
     { text: 'Contact', href: '/contact' },
   ],
 
-  selectedWorkHeading: 'Selected work',
-  allWorkLink: 'All work',
-
+  // The closing invitation, as one sentence: the question, then the words
+  // that link to the contact page. Both are set in the serif, so keep them
+  // short enough to read as a single line of thought.
   ctaQuote: 'Have something in mind?',
-  ctaBody: `Tell me what you're trying to build and what's in the way. I'll
-    tell you honestly whether I'm the right person for it.`,
-  ctaButton: 'Start a project',
+  ctaLink: 'Tell me about it.',
 };
 
 export const WORK = {
